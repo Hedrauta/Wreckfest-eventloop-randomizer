@@ -110,7 +110,7 @@ do {
     } until ( $rh_rs -eq 'n' -or $rh_rs -eq 'y')
 Write-Host "Starting Randomizing"
 sleep 1
-write-host "" > eventloop.txt
+"" | Out-File -FilePath .\eventloop.txt
 do {
     $rd = $null
     $rdt = $null
@@ -192,10 +192,10 @@ do {
     $rd = $types | Get-Random
     if ($rd -eq 'sp') {
         $rdt = $special | Get-Random
-        Write-Host "el_add=$rdt" >> eventloop.txt
-        Write-Host "el_gamemode=racing" >> eventloop.txt
-        Write-Host "el_laps=$rh_sp_r" >> eventloop.txt
-        Write-Host "" >> eventloop.txt
+        "el_add=$rdt" | Out-File -FilePath .\eventloop.txt -Append
+        "el_gamemode=racing" | Out-File -FilePath .\eventloop.txt -Append
+        "el_laps=$rh_sp_r" | Out-File -FilePath .\eventloop.txt -Append
+        "" | Out-File -FilePath .\eventloop.txt -Append
         $x = 0
         if ( $special[0] -ne $rdt ) {
             do {
@@ -206,10 +206,10 @@ do {
         } 
     if ($rd -eq 'f8') {
         $rdt = $figure8 | Get-Random
-        Write-Host "el_add=$rdt" >> eventloop.txt
-        Write-Host "el_gamemode=racing" >> eventloop.txt
-        Write-Host "el_laps=$rh_f8_r" >> eventloop.txt
-        Write-Host "" >> eventloop.txt
+        "el_add=$rdt" | Out-File -FilePath .\eventloop.txt -Append
+        "el_gamemode=racing" | Out-File -FilePath .\eventloop.txt -Append
+        "el_laps=$rh_f8_r" | Out-File -FilePath .\eventloop.txt -Append
+        "" | Out-File -FilePath .\eventloop.txt -Append
         $x = 0
         if ($figure8[0] -ne $rdt)
             {
@@ -221,10 +221,10 @@ do {
         }
     if ($rd -eq 'ov') {
         $rdt = $oval | Get-Random
-        Write-Host "el_add=$rdt" >> eventloop.txt
-        Write-Host "el_gamemode=racing" >> eventloop.txt
-        Write-Host "el_laps=$rh_ov_r" >> eventloop.txt
-        Write-Host "" >> eventloop.txt
+        "el_add=$rdt" | Out-File -FilePath .\eventloop.txt -Append
+        "el_gamemode=racing" | Out-File -FilePath .\eventloop.txt -Append
+        "el_laps=$rh_ov_r" | Out-File -FilePath .\eventloop.txt -Append
+        "" | Out-File -FilePath .\eventloop.txt -Append
         $x = 0
         if ($oval[0] -ne $rdt)
             {
@@ -236,10 +236,10 @@ do {
         }
     if ($rd -eq 'r') {
         $rdt = $racing | Get-Random
-        Write-Host "el_add=$rdt" >> eventloop.txt
-        Write-Host "el_gamemode=racing" >> eventloop.txt
-        Write-Host "el_laps=$rh_r_r" >> eventloop.txt
-        Write-Host "" >> eventloop.txt
+        "el_add=$rdt" | Out-File -FilePath .\eventloop.txt -Append
+        "el_gamemode=racing" | Out-File -FilePath .\eventloop.txt -Append
+        "el_laps=$rh_r_r" | Out-File -FilePath .\eventloop.txt -Append
+        "" | Out-File -FilePath .\eventloop.txt -Append
         $x = 0
         if ($racing[0] -ne $rdt)
             {
@@ -251,10 +251,10 @@ do {
         }
     if ($rd -eq 'rl') {
         $rdt = $racing_l | Get-Random
-        Write-Host "el_add=$rdt" >> eventloop.txt
-        Write-Host "el_gamemode=racing" >> eventloop.txt
-        Write-Host "el_laps=$rh_rl_r" >> eventloop.txt
-        Write-Host "" >> eventloop.txt
+        "el_add=$rdt" | Out-File -FilePath .\eventloop.txt -Append
+        "el_gamemode=racing" | Out-File -FilePath .\eventloop.txt -Append
+        "el_laps=$rh_rl_r" | Out-File -FilePath .\eventloop.txt -Append
+        "" | Out-File -FilePath .\eventloop.txt -Append
         $x = 0
         if ($racing_l[0] -ne $rdt)
             {
@@ -266,10 +266,10 @@ do {
         }
     if ($rd -eq 'rs') {
         $rdt = $racing_s | Get-Random
-        Write-Host "el_add=$rdt" >> eventloop.txt
-        Write-Host "el_gamemode=racing" >> eventloop.txt
-        Write-Host "el_laps=$rh_rs_r" >> eventloop.txt
-        Write-Host "" >> eventloop.txt
+        "el_add=$rdt" | Out-File -FilePath .\eventloop.txt -Append
+        "el_gamemode=racing" | Out-File -FilePath .\eventloop.txt -Append
+        "el_laps=$rh_rs_r" | Out-File -FilePath .\eventloop.txt -Append
+        "" | Out-File -FilePath .\eventloop.txt -Append
         $x = 0
         if ($racing_s[0] -ne $rdt)
             {
@@ -281,4 +281,4 @@ do {
         }
     if ($rd -eq $null){}
 
-    } until ($types[0] -eq $null)
+    } until($types[0] -eq $null)
