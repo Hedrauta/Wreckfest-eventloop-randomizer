@@ -9,4 +9,4 @@ IF script doesn't execute, there may be an issue with Microsofts default policy.
 Run Powershell in admin, and execute 
 ** set-executionpolicy remotesigned ** 
 
-After this command, the ps1-file should be able to run.
+After this command, the ps1-file may be able to run.
