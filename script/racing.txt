@@ -1,3 +1,13 @@
-10
-11
-12
+gravel1_main_loop
+gravel1_main_loop_rev 
+sandpit1_short_loop
+sandpit1_short_loop_rev
+tarmac1_short_circuit
+tarmac1_short_circuit_rev
+mixed3_short_loop
+mixed3_short_loop_rev
+mixed4_main_circuit
+mixed4_main_circuit_rev
+mixed7_r1
+mixed7_r1_rev
+mixed8_r1

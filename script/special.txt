@@ -1,3 +1,8 @@
-1
-2
-3
+speedway2_oval_loop
+loop
+triangle_r1
+crash_canyon_main_circuit
+bonebreaker_valley_main_circuit
+fields09_1
+forest12_2
+urban06
