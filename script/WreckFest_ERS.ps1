@@ -115,76 +115,34 @@ do {
     $rd = $null
     $rdt = $null
 
-    if ($special[0] -eq $null -and $types.Contains('sp'))
+    if ($special.Count -eq 0 -and $types.Contains('sp'))
         {
-        $y = 0
-        if ($types[0] -ne 'sp')
-            {
-            do {
-                $y += 1
-               } until ($types[$y] -eq 'sp')
-            }
-        $types.RemoveAt($y)
+        $null = $types.Remove('sp')
         }
 
-    if ($figure8[0] -eq $null -and $types.Contains('f8'))
+    if ($figure8.Count -eq 0 -and $types.Contains('f8'))
         {
-        $y = 0
-        if ($types[0] -ne 'f8')
-            {
-            do {
-                $y += 1
-               } until ($types[$y] -eq 'f8')
-            }
-        $types.RemoveAt($y)
+        $null = $types.Remove('f8')
         }
 
-    if ($oval[0] -eq $null -and $types.Contains('ov'))
+    if ($oval.Count -eq 0 -and $types.Contains('ov'))
         {
-        $y = 0
-        if ($types[0] -ne 'ov')
-            {
-            do {
-                $y += 1
-               } until ($types[$y] -eq 'ov')
-            }
-        $types.RemoveAt($y)
+        $null = $types.Remove('ov')
         }
 
-    if ($racing[0] -eq $null -and $types.Contains('r'))
+    if ($racing.Count -eq 0 -and $types.Contains('r'))
         {
-        $y = 0
-        if ($types[0] -ne 'r')
-            {
-            do {
-                $y += 1
-               } until ($types[$y] -eq 'r')
-            }
-        $types.RemoveAt($y)
+        $null = $types.Remove('r')
         }
 
-    if ($racing_l[0] -eq $null -and $types.Contains('rl'))
+    if ($racing_l.Count -eq 0 -and $types.Contains('rl'))
         {
-        $y = 0
-        if ($types[0] -ne 'rl')
-            {
-            do {
-                $y += 1
-               } until ($types[$y] -eq 'rl')
-            }
-        $types.RemoveAt($y)
+        $null = $types.Remove('rl')
         }
 
-    if ($racing_s[0] -eq $null -and $types.Contains('rs'))
+    if ($racing_s.Count -eq 0 -and $types.Contains('rs'))
         {
-        $y = 0
-        if ($types[0] -ne 'r')
-            {
-            do {
-                $y += 1
-               } until ($types[$y] -eq 'rs')
-            }
-        $types.RemoveAt($y)
+        $null = $types.Remove('rs')
         }
 
 
@@ -196,13 +154,7 @@ do {
         "el_gamemode=racing" | Out-File -FilePath .\eventloop.txt -Append
         "el_laps=$rh_sp_r" | Out-File -FilePath .\eventloop.txt -Append
         "" | Out-File -FilePath .\eventloop.txt -Append
-        $x = 0
-        if ( $special[0] -ne $rdt ) {
-            do {
-                $x += 1
-               } until ($special[$x] -eq $rdt)
-            }
-        $special.RemoveAt($x)
+        $null = $special.Remove($rdt)
         } 
     if ($rd -eq 'f8') {
         $rdt = $figure8 | Get-Random
@@ -210,14 +162,7 @@ do {
         "el_gamemode=racing" | Out-File -FilePath .\eventloop.txt -Append
         "el_laps=$rh_f8_r" | Out-File -FilePath .\eventloop.txt -Append
         "" | Out-File -FilePath .\eventloop.txt -Append
-        $x = 0
-        if ($figure8[0] -ne $rdt)
-            {
-            do {
-                $x += 1
-               } until ($figure8[$x] -eq $rdt)
-            }
-        $figure8.RemoveAt($x)
+        $null = $figure8.Remove($rdt)
         }
     if ($rd -eq 'ov') {
         $rdt = $oval | Get-Random
@@ -225,14 +170,7 @@ do {
         "el_gamemode=racing" | Out-File -FilePath .\eventloop.txt -Append
         "el_laps=$rh_ov_r" | Out-File -FilePath .\eventloop.txt -Append
         "" | Out-File -FilePath .\eventloop.txt -Append
-        $x = 0
-        if ($oval[0] -ne $rdt)
-            {
-            do {
-                $x += 1
-               } until ($oval[$x] -eq $rdt)
-            }
-        $oval.RemoveAt($x)
+        $null = $oval.Remove($rdt)
         }
     if ($rd -eq 'r') {
         $rdt = $racing | Get-Random
@@ -240,14 +178,7 @@ do {
         "el_gamemode=racing" | Out-File -FilePath .\eventloop.txt -Append
         "el_laps=$rh_r_r" | Out-File -FilePath .\eventloop.txt -Append
         "" | Out-File -FilePath .\eventloop.txt -Append
-        $x = 0
-        if ($racing[0] -ne $rdt)
-            {
-            do {
-                $x += 1
-               } until ($racing[$x] -eq $rdt)
-            }
-        $racing.RemoveAt($x)
+        $null = $racing.Remove($rdt)
         }
     if ($rd -eq 'rl') {
         $rdt = $racing_l | Get-Random
@@ -255,14 +186,7 @@ do {
         "el_gamemode=racing" | Out-File -FilePath .\eventloop.txt -Append
         "el_laps=$rh_rl_r" | Out-File -FilePath .\eventloop.txt -Append
         "" | Out-File -FilePath .\eventloop.txt -Append
-        $x = 0
-        if ($racing_l[0] -ne $rdt)
-            {
-            do {
-                $x += 1
-               } until ($racing_l[$x] -eq $rdt)
-            }
-        $racing_l.RemoveAt($x)
+        $null = $racing_l.Remove($rdt)
         }
     if ($rd -eq 'rs') {
         $rdt = $racing_s | Get-Random
@@ -270,18 +194,9 @@ do {
         "el_gamemode=racing" | Out-File -FilePath .\eventloop.txt -Append
         "el_laps=$rh_rs_r" | Out-File -FilePath .\eventloop.txt -Append
         "" | Out-File -FilePath .\eventloop.txt -Append
-        $x = 0
-        if ($racing_s[0] -ne $rdt)
-            {
-            do {
-                $x += 1
-               } until ($racing_s[$x] -eq $rdt)
-            }
-        $racing_s.RemoveAt($x)
+        $null = $racing_s.Remove($rdt)
         }
-    if ($rd -eq $null){}
-
-    } until($types[0] -eq $null)
+    } until($types.Count -eq 0)
 
 # SIG # Begin signature block
 # MIIFuQYJKoZIhvcNAQcCoIIFqjCCBaYCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
