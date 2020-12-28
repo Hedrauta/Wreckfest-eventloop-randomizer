@@ -1,4 +1,11 @@
-﻿Write-Host " █████   ███   █████                             █████         ██████                    █████   "
+﻿[System.Collections.Generic.List[System.Object]]$special = @()
+[System.Collections.Generic.List[System.Object]]$figure8 = @()
+[System.Collections.Generic.List[System.Object]]$oval = @()
+[System.Collections.Generic.List[System.Object]]$racing = @()
+[System.Collections.Generic.List[System.Object]]$racing_l = @()
+[System.Collections.Generic.List[System.Object]]$racing_s = @()
+
+Write-Host " █████   ███   █████                             █████         ██████                    █████   "
 Write-Host "░░███   ░███  ░░███                             ░░███         ███░░███                  ░░███    "
 Write-Host "░███   ░███   ░███  ████████   ██████   ██████  ░███ █████  ░███ ░░░   ██████   █████  ███████  "
 Write-Host "░███   ░███   ░███ ░░███░░███ ███░░███ ███░░███ ░███░░███  ███████    ███░░███ ███░░  ░░░███░   "
@@ -7,7 +14,8 @@ Write-Host " ░░░█████░█████░    ░███     �
 Write-Host "   ░░███ ░░███      █████    ░░██████ ░░██████  ████ █████  █████    ░░██████  ██████   ░░█████ "
 Write-Host "    ░░░   ░░░      ░░░░░      ░░░░░░   ░░░░░░  ░░░░ ░░░░░  ░░░░░      ░░░░░░  ░░░░░░     ░░░░░"
 Write-Host "Eventloop-Randomizer-Script"
-sleep 1
+sleep 2
+Write-Host ""
 Write-Host ""
 [System.Collections.ArrayList]$types = @()
 Write-Host "Picking type of maps"
@@ -18,12 +26,14 @@ do {
     $rh_sp = Read-Host -Prompt "Do you want SPECIAL-Maps? [y/n]"
     
     if ($rh_sp -eq 'y') {
-        do {
-            Write-Host "Loaded SPECIAL-Map-file"
             [System.Collections.Generic.List[System.Object]]$special = Get-Content .\special.txt
+            Write-Host "Loaded $($special.count) SPECIAL-Maps"
+            
+        do {
             Write-Host ""
             $rh_sp_r = 0
-            [int]$rh_sp_r = Read-Host -Prompt "How much rounds shall Special-Maps have [1-60] [Only Integer]"
+            try{[int]$rh_sp_r = Read-Host -Prompt "How much rounds shall Special-Maps have [1-60] [Only Integer]"}
+            catch{""}
             } until ($rh_sp_r -is [int] -and $rh_sp_r -ge "1" -and $rh_sp_r -le "60")
         $types += 'sp'
         }
@@ -34,12 +44,13 @@ do {
     $rh_f8 = Read-Host -Prompt "Do you want FIGURE8-Maps? [y/n]"
     
     if ($rh_f8 -eq 'y') {
+        [System.Collections.Generic.List[System.Object]]$figure8 = Get-Content .\figure8.txt
+        Write-Host "Loaded $($figure8.Count) FIGURE8-Maps"
         do {
-            Write-Host "Loaded FIGURE8-Map-file"
-            [System.Collections.Generic.List[System.Object]]$figure8 = Get-Content .\figure8.txt
             Write-Host ""
             $rh_f8_r = 0
-            [int]$rh_f8_r = Read-Host -Prompt "How much rounds shall FIGURE8-Maps have [1-60] [Only Integer]"
+            try{[int]$rh_f8_r = Read-Host -Prompt "How much rounds shall FIGURE8-Maps have [1-60] [Only Integer]"}
+            catch{""}
             } until ($rh_f8_r -is [int] -and $rh_f8_r -ge "1" -and $rh_f8_r -le "60")
         $types += 'f8'
         }
@@ -50,28 +61,46 @@ do {
     $rh_ov = Read-Host -Prompt "Do you want OVAL-Maps? [y/n]"
     
     if ($rh_ov -eq 'y') {
-        do {
-            Write-Host "Loaded FIGURE8-Map-file"
-            [System.Collections.Generic.List[System.Object]]$oval = Get-Content .\oval.txt
-            Write-Host ""
+        [System.Collections.Generic.List[System.Object]]$oval = Get-Content .\oval.txt
+        Write-Host "Loaded $($oval.Count) Oval-Maps"
+           do {
+             Write-Host ""
             $rh_ov_r = 0
-            [int]$rh_ov_r = Read-Host -Prompt "How much rounds shall FIGURE8-Maps have [1-60] [Only Integer]"
+            try{[int]$rh_ov_r = Read-Host -Prompt "How much rounds shall Oval-Maps have [1-60] [Only Integer]"}
+            catch{""}
             } until ($rh_ov_r -is [int] -and $rh_ov_r -ge "1" -and $rh_ov_r -le "60")
         $types += 'ov'
         }
     } until ( $rh_ov -eq 'n' -or $rh_ov -eq 'y')
     Write-Host ""
 do {
+    Write-Host "Read and edit racing_s.txt for specific maps"
+    $rh_rs = Read-Host -Prompt "Do you want short ( <1.2km per round) RACING-Maps? [y/n]"
+    Write-host ""
+    if ($rh_rs -eq 'y') {
+        [System.Collections.Generic.List[System.Object]]$racing_s = Get-Content .\racing_s.txt
+        Write-Host "Loaded $($racing_s.Count) short length Racing-Maps"
+            do {
+            Write-Host ""
+            $rh_rs_r = 0
+            try{[int]$rh_rs_r = Read-Host -Prompt "How much rounds shall the normal length RACING-Maps have [1-60] [Only Integer]"}
+            catch{""}
+            } until ($rh_rs_r -is [int] -and $rh_rs_r -ge "1" -and $rh_rs_r -le "60")
+        $types += 'rs'
+        }
+    Write-Host ""
+do {
     Write-Host "Read and edit racing.txt for specific maps"
     $rh_r = Read-Host -Prompt "Do you want normal length (1.2km-1.9km per round) RACING-Maps? [y/n]"
     
     if ($rh_r -eq 'y') {
-        do {
-            Write-Host "Loaded Racing-Map-file"
-            [System.Collections.Generic.List[System.Object]]$racing = Get-Content .\racing.txt
+        [System.Collections.Generic.List[System.Object]]$racing = Get-Content .\racing.txt
+        Write-Host "Loaded $($racing.Count) normal length Racing-Maps"
+            do {
             Write-Host ""
             $rh_r_r = 0
-            [int]$rh_r_r = Read-Host -Prompt "How much rounds shall the normal length RACING-Maps have [1-60] [Only Integer]"
+            try{[int]$rh_r_r = Read-Host -Prompt "How much rounds shall the normal length RACING-Maps have [1-60] [Only Integer]"}
+            catch{""}
             } until ($rh_r_r -is [int] -and $rh_r_r -ge "1" -and $rh_r_r -le "60")
         $types += 'r'
         }
@@ -82,31 +111,18 @@ do {
     $rh_rl = Read-Host -Prompt "Do you want long (1.9km+ per round) RACING-Maps? [y/n]"
     
     if ($rh_rl -eq 'y') {
-        do {
-            Write-Host "Loaded Racing_l-Map-file"
-            [System.Collections.Generic.List[System.Object]]$racing_l = Get-Content .\racing_l.txt
+        [System.Collections.Generic.List[System.Object]]$racing_l = Get-Content .\racing_l.txt
+        Write-Host "Loaded $($racing_l.Count) long length Racing-Maps"
+            do {
             Write-Host ""
             $rh_rl_r = 0
-            [int]$rh_rl_r = Read-Host -Prompt "How much rounds shall the normal length RACING-Maps have [1-60] [Only Integer]"
+            try{[int]$rh_rl_r = Read-Host -Prompt "How much rounds shall the normal length RACING-Maps have [1-60] [Only Integer]"}
+            catch{""}
             } until ($rh_rl_r -is [int] -and $rh_rl_r -ge "1" -and $rh_rl_r -le "60")
         $types += 'rl'
         }
     } until ( $rh_rl -eq 'n' -or $rh_rl -eq 'y')
     Write-Host ""
-do {
-    Write-Host "Read and edit racing_s.txt for specific maps"
-    $rh_rs = Read-Host -Prompt "Do you want short ( <1.2km per round) RACING-Maps? [y/n]"
-    
-    if ($rh_rs -eq 'y') {
-        do {
-            Write-Host "Loaded Racing_s-Map-file"
-            [System.Collections.Generic.List[System.Object]]$racing_s = Get-Content .\racing_s.txt
-            Write-Host ""
-            $rh_rs_r = 0
-            [int]$rh_rs_r = Read-Host -Prompt "How much rounds shall the normal length RACING-Maps have [1-60] [Only Integer]"
-            } until ($rh_rs_r -is [int] -and $rh_rs_r -ge "1" -and $rh_rs_r -le "60")
-        $types += 'rs'
-        }
     } until ( $rh_rs -eq 'n' -or $rh_rs -eq 'y')
 Write-Host "Starting Randomizing"
 sleep 1
@@ -117,33 +133,99 @@ do {
 
     if ($special.Count -eq 0 -and $types.Contains('sp'))
         {
-        $null = $types.Remove('sp')
+        Write-Host "No more Special-Maps are found"
+        do {
+            $rh_sp_a = Read-Host -Prompt "Do you want Special-Maps loaded again? [y/n]"
+            if ($rh_sp_a -eq 'y'){
+                [System.Collections.Generic.List[System.Object]]$special = Get-Content .\special.txt
+                Write-Host "Loaded $($special.Count) Special-Maps. Continue Randomizing..."
+                }
+            if ($rh_sp_a -eq 'n') {
+                $null = $types.Remove('sp')
+                Write-Host "Removed Type 'Special'. Continue Randomzing..."
+                }
+            } until ($rh_sp_a -eq 'n' -or $rh_sp_a -eq 'y')
         }
 
     if ($figure8.Count -eq 0 -and $types.Contains('f8'))
         {
-        $null = $types.Remove('f8')
+        Write-Host "No more Figure8-Maps are found"
+        do {
+            $rh_f8_a = Read-Host -Prompt "Do you want Figure8-Maps loaded again? [y/n]"
+            if ($rh_f8_a -eq 'y'){
+                [System.Collections.Generic.List[System.Object]]$figure8 = Get-Content .\figure8.txt
+                Write-Host "Loaded $($figure8.Count) Figure8-Maps. Continue Randomizing..."
+                }
+            if ($rh_f8_a -eq 'n') {
+                $null = $types.Remove('f8')
+                Write-Host "Removed Type 'Figure8'. Continue Randomzing..."
+                }
+            } until ($rh_f8_a -eq 'n' -or $rh_f8_a -eq 'y')
         }
 
     if ($oval.Count -eq 0 -and $types.Contains('ov'))
         {
-        $null = $types.Remove('ov')
+        Write-Host "No more Oval-Maps are found"
+        do {
+            $rh_ov_a = Read-Host -Prompt "Do you want Oval-Maps loaded again? [y/n]"
+            if ($rh_ov_a -eq 'y'){
+                [System.Collections.Generic.List[System.Object]]$oval = Get-Content .\oval.txt
+                Write-Host "Loaded $($oval.Count) Oval-Maps. Continue Randomizing..."
+                }
+            if ($rh_ov_a -eq 'n') {
+                $null = $types.Remove('ov')
+                Write-Host "Removed Type 'Oval'. Continue Randomzing..."
+                }
+            } until ($rh_ov_a -eq 'n' -or $rh_ov_a -eq 'y')
         }
-
+    if ($racing_s.Count -eq 0 -and $types.Contains('rs'))
+        {
+        Write-Host "No more short length Racing-Maps are found"
+        do {
+            $rh_rs_a = Read-Host -Prompt "Do you want short length Racing-Maps loaded again? [y/n]"
+            if ($rh_rs_a -eq 'y'){
+                [System.Collections.Generic.List[System.Object]]$racing_s = Get-Content .\racing_s.txt
+                Write-Host "Loaded $($racing_s.Count) short length Racing-Maps. Continue Randomizing..."
+                }
+            if ($rh_rs_a -eq 'n') {
+                $null = $types.Remove('rs')
+                Write-Host "Removed Type 'Short length Racing'. Continue Randomzing..."
+                }
+            } until ($rh_rs_a -eq 'n' -or $rh_rs_a -eq 'y')
+        }
     if ($racing.Count -eq 0 -and $types.Contains('r'))
         {
-        $null = $types.Remove('r')
+        Write-Host "No more normal length Racing-Maps are found"
+        do {
+            $rh_r_a = Read-Host -Prompt "Do you want normal length Racing-Maps loaded again? [y/n]"
+            if ($rh_r_a -eq 'y'){
+                [System.Collections.Generic.List[System.Object]]$racing = Get-Content .\racing.txt
+                Write-Host "Loaded $($racing.Count) normal length Racing-Maps. Continue Randomizing..."
+                }
+            if ($rh_r_a -eq 'n') {
+                $null = $types.Remove('r')
+                Write-Host "Removed Type 'Normal length Racing'. Continue Randomzing..."
+                }
+            } until ($rh_r_a -eq 'n' -or $rh_r_a -eq 'y')
         }
 
     if ($racing_l.Count -eq 0 -and $types.Contains('rl'))
         {
-        $null = $types.Remove('rl')
+        Write-Host "No more long length Racing-Maps are found"
+        do {
+            $rh_rl_a = Read-Host -Prompt "Do you want long length Racing-Maps loaded again? [y/n]"
+            if ($rh_rl_a -eq 'y'){
+                [System.Collections.Generic.List[System.Object]]$racing_l = Get-Content .\racing_l.txt
+                Write-Host "Loaded $($racing_l.Count) long length Racing-Maps. Continue Randomizing..."
+                }
+            if ($rh_rl_a -eq 'n') {
+                $null = $types.Remove('rl')
+                Write-Host "Removed Type 'long length Racing'. Continue Randomzing..."
+                }
+            } until ($rh_rl_a -eq 'n' -or $rh_rl_a -eq 'y')
         }
 
-    if ($racing_s.Count -eq 0 -and $types.Contains('rs'))
-        {
-        $null = $types.Remove('rs')
-        }
+
 
 
 
@@ -197,6 +279,26 @@ do {
         $null = $racing_s.Remove($rdt)
         }
     } until($types.Count -eq 0)
+Write-Host ""
+Write-Host ""
+Write-Host ""
+Write-Host "Randomizing finished"
+Write-Host ""
+do {
+    $cl_c = Read-Host -Prompt "do you want the loop copied into your Clipboard? [y/n] "
+    if ($cl_c -eq 'y'){
+        Get-Content .\eventloop.txt | Set-Clipboard
+        }
+    } until ($cl_c -eq 'y' -or $cl_c -eq 'n')
+
+Write-Host ""
+Write-Host ""
+Write-Host ""
+Write-Host "Thanks for using my Script."
+Write-Host "Keep updated on https://github.com/Hedrauta/wreckfest-eventloop-randomizer for new features, updates or if you have new ideas"
+Write-Host ""
+Write-Host "This script is licensed under MIT. For more Informations, please visit my Github (link above)"
+cmd /c pause
 
 # SIG # Begin signature block
 # MIIFuQYJKoZIhvcNAQcCoIIFqjCCBaYCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
