@@ -14,7 +14,11 @@ Write-Host " ░░░█████░█████░    ░███     �
 Write-Host "   ░░███ ░░███      █████    ░░██████ ░░██████  ████ █████  █████    ░░██████  ██████   ░░█████ "
 Write-Host "    ░░░   ░░░      ░░░░░      ░░░░░░   ░░░░░░  ░░░░ ░░░░░  ░░░░░      ░░░░░░  ░░░░░░     ░░░░░"
 Write-Host "Eventloop-Randomizer-Script"
-sleep 2
-Write-Host "Preparing types"  ##Fetching .txt-files except eventloop, and define the types
-[System.Collections.ArrayList]$types = $(Get-ChildItem -Exclude WreckFest_ERS.ps1,eventloop.txt).BaseName
-ForEach-Object -Process (write-Host "$_ found") -InputObject $types # it doesnt work..... thinking otherwise.... later!
+sleep 1
+"" ; "" ; ""
+Write-Host "Preparing types"
+""
+[System.Collections.ArrayList]$types = $(Get-ChildItem -Exclude WreckFest_ERS.ps1,eventloop.txt).BaseName #fetching .txt-files, and define them in an array
+for ($i=0; $i -le $($types.Count - 1) ; $i++) {
+    Write-Host "$($types[$i]).txt found" # oh boy, this one is working fine.... i will get this possible
+    }
