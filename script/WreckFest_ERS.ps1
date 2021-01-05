@@ -13,6 +13,7 @@ Write-Host "Preparing types"
 ""
 [System.Collections.ArrayList]$types = $(Get-ChildItem -Exclude WreckFest_ERS.ps1,eventloop.txt) #fetching .txt-files, and define them in an array
 $types | ForEach-Object{ $_ | Add-Member -MemberType NoteProperty -Name Rounds -Value 0 } #Adding Rounds to Array and set to 0 for later use
+$types | ForEach-Object{ $_ | Add-Member -MemberType NoteProperty -Name Maps -Value @() } #Adding empty Array for maps. So there will be only one Array for everything
 for ($i=0; $i -le $($types.Count - 1) ; $i++) { #starting to ask for each entry in array
     Write-Host "$($($types[$i]).Name) found"
         $rh_i = $null
