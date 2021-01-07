@@ -2,4 +2,3 @@ dirt_speedway_dirt_oval
 speedway1_oval
 speedway2_inner_oval
 speedway2_outer_oval
-speedway2_oval_loop
