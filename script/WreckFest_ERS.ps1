@@ -21,9 +21,9 @@ for ($i=0; $i -le $($types.Count - 1) ; $i++) { #starting to ask for each entry 
         $rh_i = $null #set this to NULL to avoid issues in later use ( maybe i could use try/catch, but it's a string so no can do )
         $rh_i = Read-Host -Prompt "Do you want load $($($types[$i]).Name)?"
         if ($rh_i -eq 'y') {
-            $($types[$i]).Maps =  Get-Content $($($types[$i]).Name) #type is picked: load the Maps-Sub-array with the maps-content!!
+            [System.Collections.Generic.List[System.Object]]$($types[$i]).Maps =  Get-Content $($($types[$i]).Name) #type is picked: load the Maps-Sub-List with the maps-content!!
             ""
-            Write-Host "File with $($($($types[$i]).Maps).Count) Maps loaded" # .this).took).me).a).while)).to).get).it)
+            Write-Host "File with $($($($types[$i]).Maps).Count) Maps loaded"
             "+++++" #spacer <.<
             do {
                 $rh_i_r = $null
@@ -40,51 +40,51 @@ Write-Host "Files are loaded. Start randomizing!!"
 sleep 1
 "" | Out-File -FilePath .\eventloop.txt #Clearing Content from or create the eventloop.txt to save the randomizer
 do {
-    for ($i=0; $i -le $($types.Count - 1) ; $i++){
-        if ($($types[$i].Rounds) -ge 1 -and $($types[$i].Maps.Count) -eq 0){
-            Write-Host "$($($types[$i]).BaseName)-Maps are empty."
+    for ($i=0; $i -le $($types.Count - 1) ; $i++){ # before randomizing, check the Content
+        if ($($types[$i].Rounds) -ge 1 -and $($types[$i].Maps.Count) -eq 0){ # if Maps-Content is empty and round is greater or equal 1
+            Write-Host "$($($types[$i]).BaseName)-Maps are empty." 
             do {
                 $rh_rm = $null
-                $rh_rm = Read-Host -Prompt "Do you want to load $($($types[$i]).Name) again? [y/n]"
+                $rh_rm = Read-Host -Prompt "Do you want to load $($($types[$i]).Name) again? [y/n]" 
                 if ($rh_rm -eq 'y'){
                     $($types[$i]).Maps =  Get-Content $($($types[$i]).Name) #Reloading: load the Maps-Sub-array with the maps-content!!
                     Write-Host "File with $($($($types[$i]).Maps).Count) Maps reloaded"
                     }
-                if ($rh_rm -eq 'n'){
+                if ($rh_rm -eq 'n'){ # no more of this Type? Set Rounds to zero, so the file will never get loaded again
                     $types[$i].Rounds = 0
                     }
                 } until ($rh_rm -eq 'y' -or $rh_rm -eq 'n')
             }
-        if ($($($types[$i]).Rounds) -eq 0){
+        if ($($($types[$i]).Rounds) -eq 0){ # remove the file from the array, so it's faster ;)
             $types.RemoveAt($i)
             }
         }
-    if ($types.Count -ge 1){
-        $rt = Get-Random -Maximum $($types.Count - 1)
-        $rt_map = Get-Random $($types[$rt].Maps)
+    if ($types.Count -ge 1){ # are there still files in the array?
+        $rt = Get-Random -Maximum $($types.Count - 1) # pick a random file
+        $rt_map = Get-Random $($types[$rt].Maps) # pick a random map out of the file
         "el_add=$rt_map" | Out-File -FilePath .\eventloop.txt -Append
         "el_gamemode=racing" | Out-File -FilePath .\eventloop.txt -Append
         "el_laps=$($types[$rt].Rounds)" | Out-File -FilePath .\eventloop.txt -Append
-        $types[$rt].Maps.Remove($rt_map)
+        $null = $types[$rt].Maps.Remove($rt_map) # remove the picked map from the Maps-List, so it may not repeat anymore
             }
-    } until ($types.Count -eq 0)
-Write-Host "Randomizing finished"
+    } until ($types.Count -eq 0) # until the types-array is empty
+Write-Host "Randomizing finished" # Finally!!!
 ""
 do {
-    $cl_c = Read-Host -Prompt "do you want the loop copied into your Clipboard? [y/n] "
+    $cl_c = Read-Host -Prompt "do you want the loop copied into your Clipboard? [y/n] " # faster copy-paste for you
     if ($cl_c -eq 'y'){
         Get-Content .\eventloop.txt | Set-Clipboard
         }
     } until ($cl_c -eq 'y' -or $cl_c -eq 'n')
 
-"";"";""
+"";"";"" # DONE!!!
 Write-Host "Thanks for using my Script."
 Write-Host "Keep updated on https://github.com/Hedrauta/wreckfest-eventloop-randomizer for new features, updates or if you have new ideas"
 ""
 Write-Host "This script is licensed under MIT. For more Informations, please visit my Github (link above)"
 cmd /c pause
 
-# !! Signature-Part below !! Do not edit or remove completly !!
+# !! Signature-Part below !! Do not edit or remove completly ( Script "may" not work again ) !!
 
 # SIG # Begin signature block
 # MIIFuQYJKoZIhvcNAQcCoIIFqjCCBaYCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
