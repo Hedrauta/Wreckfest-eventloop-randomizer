@@ -18,8 +18,15 @@ sleep 1
 Write-Host "Preparing types"
 "______________"
 [System.Collections.ArrayList]$types = $(Get-ChildItem -Exclude WreckFest_ERS.ps1,eventloop.txt) #fetching .txt-files, and define them in an array
+if ( $types.Count -eq 0  ){
+    Write-Warning "No files found. Please define the maps into files or download the predefined ones from the GitHub"
+    sleep 7
+    exit
+    }
 $types | ForEach-Object{ $_ | Add-Member -MemberType NoteProperty -Name Rounds -Value 0 } #Adding Rounds to Array and set to 0 for later use
 $types | ForEach-Object{ $_ | Add-Member -MemberType NoteProperty -Name Maps -Value @() } #Adding empty Array for maps. So there will be only one Array for everything
+$types | ForEach-Object{ $_ | Add-Member -MemberType NoteProperty -Name race_mode -Value "none" } # separate race from demo-modes, so booth kind of tracks can written inside map-file
+$types | ForEach-Object{ $_ | Add-Member -MemberType NoteProperty -Name demo_mode -Value "none" }
 for ($i=0; $i -le $($types.Count - 1) ; $i++) { #starting to ask for each entry in array
     Write-Host "$($($types[$i]).Name) found"
         $rh_i = $null
