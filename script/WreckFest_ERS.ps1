@@ -2,7 +2,8 @@
 # defined Racing-maps, for later use
 [System.Collections.Generic.List[System.Object]]$dmaps = @('urban07';'fields10_2';'fields11_1';'bigstadium_demolition_arena';'field_derby_arena';'mudpit_demolition_arena';'grass_arena_demolition_arena';'smallstadium_demolition_arena';'fields13_2';'triangle_r2';'speedway2_demolition_arena';'speedway2_classic_arena')
 # defined Demolition-Maps
-[System.Collections.Generic.List[System.Object]]$modes = @('racing';'derby';'derby deathmatch';'team derby';'team race';'elimination race')
+[System.Collections.Generic.List[System.Object]]$modes = @('derby';'derby deathmatch';'team derby';'racing';'team race';'elimination race') 
+#Modes in Order: Demolition:("Last man Standing", "Deathmatch", "Team Deathmatch") Racing: ("Banger Race", "Team Race", "Elimination Race")
 # yeah!!!... gamemodes!!! now the fun-part :D
 Write-Host " █████   ███   █████                             █████         ██████                    █████   "
 Write-Host "░░███   ░███  ░░███                             ░░███         ███░░███                  ░░███    "
@@ -23,64 +24,26 @@ if ( $types.Count -eq 0  ){
     sleep 7
     exit
     }
-$types | ForEach-Object{ $_ | Add-Member -MemberType NoteProperty -Name Rounds -Value 0 } #Adding Rounds to Array and set to 0 for later use
+$types | ForEach-Object{ $_ | Add-Member -MemberType NoteProperty -Name set1 -Value 0 } #Adding first kind of settings to Array and set to 0 for later use
+$types | ForEach-Object{ $_ | Add-Member -MemberType NoteProperty -Name set2 -Value 0 } #second kind of settings ( for elimination or number of teams
 $types | ForEach-Object{ $_ | Add-Member -MemberType NoteProperty -Name Maps -Value @() } #Adding empty Array for maps. So there will be only one Array for everything
 $types | ForEach-Object{ $_ | Add-Member -MemberType NoteProperty -Name race_mode -Value "none" } # separate race from demo-modes, so booth kind of tracks can written inside map-file
-$types | ForEach-Object{ $_ | Add-Member -MemberType NoteProperty -Name demo_mode -Value "none" }
-for ($i=0; $i -le $($types.Count - 1) ; $i++) { #starting to ask for each entry in array
-    Write-Host "$($($types[$i]).Name) found"
-        $rh_i = $null
-    do {
-        $rh_i = $null #set this to NULL to avoid issues in later use ( maybe i could use try/catch, but it's a string so no can do )
-        $rh_i = Read-Host -Prompt "Do you want load $($($types[$i]).Name)?"
-        if ($rh_i -eq 'y') {
-            [System.Collections.Generic.List[System.Object]]$($types[$i]).Maps =  Get-Content $($($types[$i]).Name) #type is picked: load the Maps-Sub-List with the maps-content!!
-            ""
-            Write-Host "File with $($($($types[$i]).Maps).Count) Maps loaded"
-            "+++++" #spacer <.<
-            do {
-                $rh_i_r = $null
-                try{[Int]$rh_i_r = Read-Host -Prompt "How much rounds shall $($($types[$i]).BaseName)-Maps have? [1-60]"} #ye, try/catch, because this should be int
-                catch { "Only Integers between 1-60!!"} #tried something else than an integer?
-                } until ($rh_i_r -ge "1" -and $rh_i_r -le "60") #is it between 1 and 60?
-            $($types[$i]).Rounds = $rh_i_r #Set the rounds !
-            "______________" #moar spacer!!! o.O
-                }
-        } until ($rh_i -eq 'y' -or $rh_i -eq 'n')
-    }
-""
-Write-Host "Files are loaded. Start randomizing!!"
-sleep 1
-"" | Out-File -FilePath .\eventloop.txt #Clearing Content from or create the eventloop.txt to save the randomizer
-do {
-    for ($i=0; $i -le $($types.Count - 1) ; $i++){ # before randomizing, check the Content
-        if ($($types[$i].Rounds) -ge 1 -and $($types[$i].Maps.Count) -eq 0){ # if Maps-Content is empty and round is greater or equal 1
-            Write-Host "$($($types[$i]).BaseName)-Maps are empty." 
-            do {
-                $rh_rm = $null
-                $rh_rm = Read-Host -Prompt "Do you want to load $($($types[$i]).Name) again? [y/n]" 
-                if ($rh_rm -eq 'y'){
-                    $($types[$i]).Maps =  Get-Content $($($types[$i]).Name) #Reloading: load the Maps-Sub-array with the maps-content!!
-                    Write-Host "File with $($($($types[$i]).Maps).Count) Maps reloaded"
-                    }
-                if ($rh_rm -eq 'n'){ # no more of this Type? Set Rounds to zero, so the file will never get loaded again
-                    $types[$i].Rounds = 0
-                    }
-                } until ($rh_rm -eq 'y' -or $rh_rm -eq 'n')
-            }
-        if ($($($types[$i]).Rounds) -eq 0){ # remove the file from the array, so it's faster ;)
-            $types.RemoveAt($i)
-            }
-        }
-    if ($types.Count -ge 1){ # are there still files in the array?
-        $rt = Get-Random -Maximum $($types.Count - 1) # pick a random file
-        $rt_map = Get-Random $($types[$rt].Maps) # pick a random map out of the file
-        "el_add=$rt_map" | Out-File -FilePath .\eventloop.txt -Append
-        "el_gamemode=racing" | Out-File -FilePath .\eventloop.txt -Append
-        "el_laps=$($types[$rt].Rounds)" | Out-File -FilePath .\eventloop.txt -Append
-        $null = $types[$rt].Maps.Remove($rt_map) # remove the picked map from the Maps-List, so it may not repeat anymore
-            }
-    } until ($types.Count -eq 0) # until the types-array is empty
+$types | ForEach-Object{ $_ | Add-Member -MemberType NoteProperty -Name demo_mode -Value "none" } 
+
+# NEEDS REWRITE!!
+
+
+
+
+
+
+
+
+
+
+
+
+
 Write-Host "Randomizing finished" # Finally!!!
 ""
 do {
