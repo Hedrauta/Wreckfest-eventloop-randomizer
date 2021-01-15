@@ -36,8 +36,12 @@ $types | ForEach-Object{ $_ | Add-Member -MemberType NoteProperty -Name dmode -V
 # Start Defining variables, getting modes per file
 for ($i=0; $i -le $($types.Count - 1) ; $i++) { #starting to ask for each entry in array
     Write-Host "$($($types[$i]).Name) found"
-    [System.Collections.Generic.List[System.Object]]$($types[$i]).Maps =  Get-Content $($($types[$i]).Name)
-    }
+    $rh_l = $null
+    do {
+        $rh_l = Read-Host -Prompt "Do you want to load the file $($types[$i].Name)? [y/n]"
+        if ($rh_l -eq 'y') {
+            [System.Collections.Generic.List[System.Object]]$($types[$i]).Maps =  Get-Content $($($types[$i]).Name)
+            $types[0].Maps.RemoveAll(!$maps
 Write-Host "Randomizing finished" # Finally!!!
 ""
 do {
