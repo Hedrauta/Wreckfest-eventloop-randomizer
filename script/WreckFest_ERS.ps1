@@ -2,9 +2,11 @@
 # defined Racing-maps, for later use
 [System.Collections.Generic.List[System.Object]]$dmaps = @('urban07';'fields10_2';'fields11_1';'bigstadium_demolition_arena';'field_derby_arena';'mudpit_demolition_arena';'grass_arena_demolition_arena';'smallstadium_demolition_arena';'fields13_2';'triangle_r2';'speedway2_demolition_arena';'speedway2_classic_arena')
 # defined Demolition-Maps
-[System.Collections.Generic.List[System.Object]]$modes = @('derby';'derby deathmatch';'team derby';'racing';'team race';'elimination race') 
-#Modes in Order: Demolition:("Last man Standing", "Deathmatch", "Team Deathmatch") Racing: ("Banger Race", "Team Race", "Elimination Race")
-# yeah!!!... gamemodes!!! now the fun-part :D
+[System.Collections.Generic.List[System.Object]]$maps = @('speedway2_oval_loop';'loop';'triangle_r1';'crash_canyon_main_circuit';'bonebreaker_valley_main_circuit';'fields09_1';'forest12_2';'urban06';'sandpit2_2';'sandpit2_2_rev';'tarmac3_short_circuit';'tarmac3_short_circuit_rev';'mixed1_main_circuit';'mixed1_main_circuit_rev';'mixed2_main_circuit';'mixed2_main_circuit_rev';'mixed7_r3';'mixed7_r3_rev';'mixed9_r1';'mixed9_r1_rev';'mixed8_r2';'mixed8_r3_rev';'fields08_1';'fields08_1_rev';'orest11_1';'forest11_1_rev';'forest11_2';'forest11_2_rev';'sandpit1_long_loop';'sandpit1_long_loop_rev';'sandpit1_alt_loop';'sandpit1_alt_loop_rev';'sandpit2_full_circuit';'sandpit2_full_circuit_rev';'sandpit3_long_loop';'sandpit3_long_loop_rev';'sandpit3_short_loop';'sandpit3_short_loop';'tarmac1_main_circuit';'tarmac1_main_circuit_rev';'tarmac2_main_circuit';'tarmac2_main_circuit_rev';'tarmac3_main_circuit';'tarmac3_main_circuit_rev';'mixed3_long_loop';'mixed3_long_loop_rev';'mixed5_outer_loop';'mixed5_outer_loop_rev';'mixed5_inner_loop';'mixed5_inner_loop_rev';'mixed5_free_route';'urban08_1';'urban08_1_rev';'fields13_1_rev';'fields13_1';'gravel1_main_loop';'gravel1_main_loop_rev ';'sandpit1_short_loop';'sandpit1_short_loop_rev';'tarmac1_short_circuit';'tarmac1_short_circuit_rev';'mixed3_short_loop';'mixed3_short_loop_rev';'mixed4_main_circuit';'mixed4_main_circuit_rev';'mixed7_r1';'mixed7_r1_rev';'mixed8_r1';'dirt_speedway_dirt_oval';'speedway1_oval';'speedway2_inner_oval';'speedway2_outer_oval';'bigstadium_figure_8';'speedway1_figure_8';'speedway2_figure_8';'dirt_speedway_figure_8';'fields12_2';'urban07';'fields10_2';'fields11_1';'bigstadium_demolition_arena';'field_derby_arena';'mudpit_demolition_arena';'grass_arena_demolition_arena';'smallstadium_demolition_arena';'fields13_2';'triangle_r2';'speedway2_demolition_arena';'speedway2_classic_arena')
+
+[System.Collections.Generic.List[System.Object]]$dmodes = @('derby';'derby deathmatch';'team derby')
+[System.Collections.Generic.List[System.Object]]$rmodes = @('racing';'team race';'elimination race')
+# yeah!!!... gamemodes!!! 
 Write-Host " █████   ███   █████                             █████         ██████                    █████   "
 Write-Host "░░███   ░███  ░░███                             ░░███         ███░░███                  ░░███    "
 Write-Host "░███   ░███   ░███  ████████   ██████   ██████  ░███ █████  ░███ ░░░   ██████   █████  ███████  "
@@ -17,6 +19,7 @@ Write-Host "Eventloop-Randomizer-Script"
 sleep 1
 "" ; "" ; ""
 Write-Host "Preparing types"
+# Start fetching files
 "______________"
 [System.Collections.ArrayList]$types = $(Get-ChildItem -Exclude WreckFest_ERS.ps1,eventloop.txt) #fetching .txt-files, and define them in an array
 if ( $types.Count -eq 0  ){
@@ -24,26 +27,17 @@ if ( $types.Count -eq 0  ){
     sleep 7
     exit
     }
-$types | ForEach-Object{ $_ | Add-Member -MemberType NoteProperty -Name set1 -Value 0 } #Adding first kind of settings to Array and set to 0 for later use
-$types | ForEach-Object{ $_ | Add-Member -MemberType NoteProperty -Name set2 -Value 0 } #second kind of settings ( for elimination or number of teams
-$types | ForEach-Object{ $_ | Add-Member -MemberType NoteProperty -Name Maps -Value @() } #Adding empty Array for maps. So there will be only one Array for everything
-$types | ForEach-Object{ $_ | Add-Member -MemberType NoteProperty -Name race_mode -Value "none" } # separate race from demo-modes, so booth kind of tracks can written inside map-file
-$types | ForEach-Object{ $_ | Add-Member -MemberType NoteProperty -Name demo_mode -Value "none" } 
-
-# NEEDS REWRITE!!
-
-
-
-
-
-
-
-
-
-
-
-
-
+$types | ForEach-Object{ $_ | Add-Member -MemberType NoteProperty -Name Set1 -Value 0 } # Adding first kind of settings to Array and set to 0 for later use
+$types | ForEach-Object{ $_ | Add-Member -MemberType NoteProperty -Name Set2 -Value 0 } # second kind of settings ( elimination-secs or number of teams )
+$types | ForEach-Object{ $_ | Add-Member -MemberType NoteProperty -Name Maps -Value @() } #Adding empty Array for maps. Filled with maps laterly
+$types | ForEach-Object{ $_ | Add-Member -MemberType NoteProperty -Name rmode -Value "none" } # separate race from demo-modes
+$types | ForEach-Object{ $_ | Add-Member -MemberType NoteProperty -Name dmode -Value "none" } 
+# End fetching files 
+# Start Defining variables, getting modes per file
+for ($i=0; $i -le $($types.Count - 1) ; $i++) { #starting to ask for each entry in array
+    Write-Host "$($($types[$i]).Name) found"
+    [System.Collections.Generic.List[System.Object]]$($types[$i]).Maps =  Get-Content $($($types[$i]).Name)
+    }
 Write-Host "Randomizing finished" # Finally!!!
 ""
 do {
