@@ -60,7 +60,7 @@ do {
             }
         }
     if ($types.Count -ge 1){ # are there still files in the array?
-        $rt = Get-Random -Maximum $($types.Count - 1) # pick a random file
+        $rt = Get-Random -Maximum $($types.Count) # pick a random file
         $rt_map = Get-Random -InputObject $types[$rt].Maps # pick a random map out of the file
         "el_add=$rt_map" | Out-File -FilePath .\eventloop.txt -Append
         "el_gamemode=racing" | Out-File -FilePath .\eventloop.txt -Append
