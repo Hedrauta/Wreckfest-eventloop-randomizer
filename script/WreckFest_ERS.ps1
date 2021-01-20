@@ -47,7 +47,7 @@ do {
                 $rh_rm = $null
                 $rh_rm = Read-Host -Prompt "Do you want to load $($($types[$i]).Name) again? [y/n]" 
                 if ($rh_rm -eq 'y'){
-                    $($types[$i]).Maps =  Get-Content $($($types[$i]).Name) #Reloading: load the Maps-Sub-array with the maps-content!!
+                    [System.Collections.Generic.List[System.Object]]$($types[$i]).Maps =  Get-Content $($($types[$i]).Name) #Reloading: load the Maps-Sub-array with the maps-content!!
                     Write-Host "File with $($($($types[$i]).Maps).Count) Maps reloaded"
                     }
                 if ($rh_rm -eq 'n'){ # no more of this Type? Set Rounds to zero, so the file will never get loaded again
@@ -61,7 +61,7 @@ do {
         }
     if ($types.Count -ge 1){ # are there still files in the array?
         $rt = Get-Random -Maximum $($types.Count - 1) # pick a random file
-        $rt_map = Get-Random $($types[$rt].Maps) # pick a random map out of the file
+        $rt_map = Get-Random -InputObject $types[$rt].Maps # pick a random map out of the file
         "el_add=$rt_map" | Out-File -FilePath .\eventloop.txt -Append
         "el_gamemode=racing" | Out-File -FilePath .\eventloop.txt -Append
         "el_laps=$($types[$rt].Rounds)" | Out-File -FilePath .\eventloop.txt -Append
