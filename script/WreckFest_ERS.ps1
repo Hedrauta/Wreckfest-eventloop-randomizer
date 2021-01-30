@@ -36,27 +36,37 @@ $types | ForEach-Object{ $_ | Add-Member -MemberType NoteProperty -Name dmode -V
 # Start Defining variables, getting modes per file
 for ($i=0; $i -le $($types.Count - 1) ; $i++) { #starting to ask for each entry in array
     Write-Host "$($($types[$i]).Name) found"
-    $rh_l = $null
-    do {
-        $rh_l = Read-Host -Prompt "Do you want to load the file $($types[$i].Name)? [y/n]"
-        if ($rh_l -eq 'y') {
-            [System.Collections.Generic.List[System.Object]]$($types[$i]).Maps =  Get-Content $($($types[$i]).Name)
-            $types[0].Maps.RemoveAll(!$maps
-Write-Host "Randomizing finished" # Finally!!!
-""
-do {
-    $cl_c = Read-Host -Prompt "do you want the loop copied into your Clipboard? [y/n] " # faster copy-paste for you
-    if ($cl_c -eq 'y'){
-        Get-Content .\eventloop.txt | Set-Clipboard
-        }
-    } until ($cl_c -eq 'y' -or $cl_c -eq 'n')
+            $rh_l = $null
+            do {
+                $rh_l = Read-Host -Prompt "Do you want load $($types[$i].Name)? [y/n]"
+                if ($rh_l -eq 'y'){
+                    [System.Collections.Generic.List[System.Object]]$($types[$i]).Maps =  Get-Content $($($types[$i]).Name)
+                    ForEach-Object -InputObject $types[$i].Maps {
+                        if ($maps.Contains("$($_)") -eq 'FALSE'){
+                            $types[$i].Maps.Remove($_)
+                            Write-Host "$($_) is not part of the offical maplist. Removed Entry from Randomizer"
+                            }
+                    }
+                }
+    } until ($rh_l -eq 'y' -or $rh_l -eq 'n')
+}
 
-"";"";"" # DONE!!!
-Write-Host "Thanks for using my Script."
-Write-Host "Keep updated on https://github.com/Hedrauta/wreckfest-eventloop-randomizer for new features, updates or if you have new ideas"
-""
-Write-Host "This script is licensed under MIT. For more Informations, please visit my Github (link above)"
-cmd /c pause
+
+# Write-Host "Randomizing finished" # Finally!!!
+# ""
+# do {
+    # $cl_c = Read-Host -Prompt "do you want the loop copied into your Clipboard? [y/n] " # faster copy-paste for you
+    # if ($cl_c -eq 'y'){
+        # Get-Content .\eventloop.txt | Set-Clipboard
+        # }
+    # } until ($cl_c -eq 'y' -or $cl_c -eq 'n')
+
+# "";"";"" # DONE!!!
+# Write-Host "Thanks for using my Script."
+# Write-Host "Keep updated on https://github.com/Hedrauta/wreckfest-eventloop-randomizer for new features, updates or if you have new ideas"
+# ""
+# Write-Host "This script is licensed under MIT. For more Informations, please visit my Github (link above)"
+# pause
 
 # !! Signature-Part below !! Do not edit or remove completly ( Script "may" not work again ) !!
 
