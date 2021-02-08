@@ -5,6 +5,8 @@
 [System.Array]$maps = @('speedway2_oval_loop';'loop';'triangle_r1';'crash_canyon_main_circuit';'bonebreaker_valley_main_circuit';'fields09_1';'forest12_2';'urban06';'sandpit2_2';'sandpit2_2_rev';'tarmac3_short_circuit';'tarmac3_short_circuit_rev';'mixed1_main_circuit';'mixed1_main_circuit_rev';'mixed2_main_circuit';'mixed2_main_circuit_rev';'mixed7_r3';'mixed7_r3_rev';'mixed9_r1';'mixed9_r1_rev';'mixed8_r2';'mixed8_r3_rev';'fields08_1';'fields08_1_rev';'orest11_1';'forest11_1_rev';'forest11_2';'forest11_2_rev';'sandpit1_long_loop';'sandpit1_long_loop_rev';'sandpit1_alt_loop';'sandpit1_alt_loop_rev';'sandpit2_full_circuit';'sandpit2_full_circuit_rev';'sandpit3_long_loop';'sandpit3_long_loop_rev';'sandpit3_short_loop';'sandpit3_short_loop';'tarmac1_main_circuit';'tarmac1_main_circuit_rev';'tarmac2_main_circuit';'tarmac2_main_circuit_rev';'tarmac3_main_circuit';'tarmac3_main_circuit_rev';'mixed3_long_loop';'mixed3_long_loop_rev';'mixed5_outer_loop';'mixed5_outer_loop_rev';'mixed5_inner_loop';'mixed5_inner_loop_rev';'mixed5_free_route';'urban08_1';'urban08_1_rev';'fields13_1_rev';'fields13_1';'gravel1_main_loop';'gravel1_main_loop_rev ';'sandpit1_short_loop';'sandpit1_short_loop_rev';'tarmac1_short_circuit';'tarmac1_short_circuit_rev';'mixed3_short_loop';'mixed3_short_loop_rev';'mixed4_main_circuit';'mixed4_main_circuit_rev';'mixed7_r1';'mixed7_r1_rev';'mixed8_r1';'dirt_speedway_dirt_oval';'speedway1_oval';'speedway2_inner_oval';'speedway2_outer_oval';'bigstadium_figure_8';'speedway1_figure_8';'speedway2_figure_8';'dirt_speedway_figure_8';'fields12_2';'urban07';'fields10_2';'fields11_1';'bigstadium_demolition_arena';'field_derby_arena';'mudpit_demolition_arena';'grass_arena_demolition_arena';'smallstadium_demolition_arena';'fields13_2';'triangle_r2';'speedway2_demolition_arena';'speedway2_classic_arena')
 [System.Array]$dmodes = @('derby';'derby deathmatch';'team derby')
 [System.Array]$rmodes = @('racing';'team race';'elimination race')
+[System.Array]$eli_secs = @('0';'20';'30';'45';'60';'90';'120')
+[System.Array]$derby_secs = @('2';'4';'6';'8';'10';'12';'14';'16';'18';'20')
 # yeah!!!... gamemodes!!! 
 Write-Host " █████   ███   █████                             █████         ██████                    █████   "
 Write-Host "░░███   ░███  ░░███                             ░░███         ███░░███                  ░░███    "
@@ -49,18 +51,152 @@ function load_maps($a) {
                         if ($maps.Contains("$($_)") -eq $FALSE){
                             $a.Maps.Remove($_) | Out-Null 
                             Write-Host "$($_) is not part of the offical maplist. Removed Entry from Randomizer"
+                            sleep 1
                         }
                     }
                     [System.Array]$($a).Maps_Array = $($a).Maps # for use in further functions
         }
     } until ($rh_l -eq 'y' -or $rh_l -eq 'n')
 }
-function mc_race($a) {}
+function mc_race($a) {
+    $rh_l = $null
+    $($a).Maps_Array | ForEach-Object {
+    if ($rmodes.Contains("$($a.rmode)") -eq $False) {
+        if ($rmaps.Contains("$($_)") -eq $TRUE){
+            ""
+            Write-Host "Racing maps found"
+            ""
+            do {
+                Write-Host "Racing-gamemodes: 'team race' ; 'elimination race' ; 'racing'"
+                $rh_l = Read-Host -Prompt "Enter Gamemode"
+                ""
+                if ($rmodes.Contains("$($rh_l)") -eq $TRUE) {
+                    $a.rmode = $rh_l
+                    if ($rh_l -eq "racing") {
+                        $rh_m = $null
+                        do { 
+                            [int]$rh_m = Read-Host -Prompt "Enter Number of Laps for choosen mode [1-60]"
+                            if ($rh_m -ge 1 -or $rh_m -le 60) {
+                                $a.Set1 = $rh_m
+                                Write-Host "$($rh_m) laps set"
+                            }
+                        } until ($rh_m -le 60 -or $rh_m -ge 1)
+                    }
+                    if ($rh_l -eq "team race") {
+                        $rh_m = $null
+                        $rh_n = $null
+                        do {
+                            [int]$rh_m = Read-Host -Prompt "Enter NUmer of Teams [2-4]"
+                            ""
+                            if ($rh_m -ge 2 -or $rh_m -le 4) {
+                                $a.Set2 = $rh_m
+                                Write-Host "$($rh_m) Teams set."
+                                do {
+                                    [int]$rh_n = Read-Host -Prompt "Set Number of laps [1-60]"
+                                    ""
+                                    if ($rh_n -ge 1 -or $rh_n -le 60) {
+                                        $a.Set1 = $rh_n
+                                        Write-Host "$($rh_n) laps set"
+                                    }
+                                } until ($rh_n -ge 1 -or $rh_n -le 60)
+                            }
+                        } until ($rh_m -ge 2 -or $rh_m -le 4)
+                    }
+                    if ($rh_l -eq "elimination race") {
+                        $a.Set1 = 1
+                        $rh_m = $null
+                        "";""
+                        do {
+                            Write-Host "$($eli_secs)"
+                            $rh_m = Read-Host "Choose seconds of elimination from above (0=every round)"
+                            if ($eli_secs.Contains("$($rh_m)") -eq $FALSE) {
+                                Write-Host "Only Pick one of the following numbers"
+                                $rh_m = $null
+                            }
+                            if ($eli_secs.Contains("$($rh_m)") -eq $TRUE) {
+                                $a.Set2 = $rh_m
+                                Write-Host "$($rh_m) seconds set ( 0 = every round)"
+                            }
+                        } until ($eli_secs.Contains("$($rh_m)") -eq $TRUE)
+                    }
+                }
+            } until ($rmodes.Contains("$($rh_l)") -eq $true)
+        }
+    }
+    }
+}
+function mc_demo($a) {
+    $rh_l = $null
+    $($a).Maps_Array | ForEach-Object {
+    if ($dmodes.Contains("$($a.dmode)") -eq $False) {
+        if ($dmaps.Contains("$($_)") -eq $TRUE){
+            ""
+            Write-Host "Demolition-maps found"
+            do {
+                Write-Host "Demolition-gamemodes: 'derby' (Last man Standing) ; 'derby deathmatch' ; 'team derby'"
+                $rh_l = Read-Host -Prompt "Enter Gamemode"
+                ""
+                if ($dmodes.Contains("$($rh_l)") -eq $TRUE) {
+                    $a.dmode = $rh_l
+                    if ($rh_l -eq 'derby') {
+                        $a.Set1 = 1
+                        Write-Host "Last man Standing picked. No further setup"
+                    }
+                    if ($rh_l -eq 'derby deathmatch') {
+                        $rh_m = $null
+                        do {
+                            ""
+                            Write-Host "$($derby_secs)"
+                            $rh_m = Read-Host -Prompt "Pick time in minutes from above"
+                            ""
+                            if ($derby_secs.Contains("$($rh_m)") -eq $False) {
+                                Write-Host "Wrong Number picked. Please enter a correct Value"
+                                $rh_m = $null
+                            }
+                            if ($derby_secs.Contains("$($rh_m)") -eq $TRUE) {
+                                $a.Set1 = $rh_m
+                                Write-Host "$($rh_m) minutes set."
+                            }
+                        } until ($derby_secs.Contains("$($rh_m)") -eq $TRUE)
+                    }
+                    if ($rh_l -eq 'team derby') {
+                        $rh_m = $null
+                        $rh_n = $null
+                        do {
+                            ""
+                            Write-Host "$($derby_secs)"
+                            $rh_m = Read-Host -Prompt "Pick time in minutes from above"
+                            ""
+                            if ($derby_secs.Contains("$($rh_m)") -eq $FALSE) {
+                                Write-Host "Wrong Number picked. Please enter a correct value"
+                                $rh_m = $null
+                            }
+                            if ($derby_secs.Contains("$($rh_m)") -eq $TRUE) {
+                                $a.Set1 = $rh_m
+                                Write-Host "$($rh_m) minutes set."
+                                do {
+                                    [int]$rh_n = Read-Host -Prompt "Pick number of teams [2-4]"
+                                    ""
+                                    if ($rh_n -ge 2 -or $rh_n -le 4) {
+                                        $a.Set2 = $rh_n
+                                        Write-Host "$($rh_n) teams set."
+                                    }
+                                } until ($rh_n -ge 2 -or $rh_n -le 4)
+                            }
+                        } until ($derby_secs.Contains("$($rh_m)") -eq $TRUE)
+                    }
+                }
+            } until ($dmodes.Contains("$($rh_l)") -eq $true)
+        }
+    }
+    }
+}
 # Start Defining variables: loading maps, getting modes per file
 for ($i=0; $i -le $($types.Count - 1) ; $i++) {
     load_maps $types[$i]
+    mc_race $types[$i]
+    mc_demo $types[$i]
 }               
-
 
 # Write-Host "Randomizing finished" # Finally!!!
 # ""
