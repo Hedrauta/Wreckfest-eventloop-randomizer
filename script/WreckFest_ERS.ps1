@@ -21,7 +21,7 @@ Write-Host "Eventloop-Randomizer-Script"
 Write-Host "Preparing types"
 # Start fetching files
 
-[System.Collections.ArrayList] $types = $(Get-ChildItem -Exclude WreckFest_ERS.ps1,eventloop.txt)  #fetching .txt-files, and define them in an array
+[System.Collections.ArrayList]$types = $(Get-ChildItem -Exclude WreckFest_ERS.ps1,eventloop.txt)  #fetching .txt-files, and define them in an array
 
 if ( $types.Count -eq 0  ){
     Write-Warning "No files found. Please define the maps into files or download the predefined ones from the GitHub"
@@ -191,6 +191,75 @@ function mc_demo($a) {
     }
     }
 }
+function count_maps {
+    $count_maps = 0
+    for ($i=0;$i -le $($types.Count - 1);$i++){
+        $count_maps += $types[$i].Maps.Count
+    }
+    Write-Host "$($count_maps) Maps left"
+}
+function random_file {
+    $rand = Get-Random -Minimum 1 -Maximum $count_maps
+    $p = $null
+    $cup = 0
+    for ($i=0; $rand -ge $cup; $i++) {
+        $cup += $types[$i].Maps.Count
+        if ($rand -le $cup) {
+            $p = $i
+        }
+    }
+}
+function random_map {
+    $map = $null
+    $map = Get-Random -InputObject $types[$p].Maps
+}
+function reload_or_remove { # Check if content of object is empty. Ask for Reload, or remove if not.
+    for ($i=0; $i -le $($types.Count - 1) ; $i++){
+        if ($($types[$i].Set1) -ge 1 -and $($types[$i].Maps.Count) -eq 0){
+            Write-Host "$($types[$i].BaseName)-Maps are empty." 
+            do {
+                $rh_rm = $null
+                $rh_rm = Read-Host -Prompt "Do you want to load $($($types[$i]).Name) again? [y/n]" 
+                if ($rh_rm -eq 'y'){
+                    [System.Collections.Generic.List[System.Object]]$($types[$i]).Maps =  $types[$i].Maps_Array 
+                    Write-Host "$($types[$i].Maps.Count) Maps reloaded"
+                }
+                if ($rh_rm -eq 'n'){ 
+                    $types[$i].Set1 = 0
+                }
+            } until ($rh_rm -eq 'y' -or $rh_rm -eq 'n')
+        }
+        if ($($($types[$i]).Set1) -eq 0){ 
+            $types.RemoveAt($i) | Out-Null
+        }
+    }
+}
+function write_file {
+    "el_add=$map" | Out-File -FilePath .\eventloop.txt -Append
+    "el_gamemode=$($types[$p].rmode)" | Out-File -FilePath .\eventloop.txt -Append
+    if ($rmaps.Contains("$($map)") -eq $true){
+        if ($types[$p].rmode -eq "racing") {
+            "el_laps=$($types[$p].Set1)"
+        }
+        if ($types[$p].rmode -eq "team race") {
+            "el_num_teams=$($types[$p].Set2)"  | Out-File -FilePath .\eventloop.txt -Append
+            "el_laps=$($types[$p].Set1)"  | Out-File -FilePath .\eventloop.txt -Append
+        }
+        if ($types[$p].rmode -eq "elimination race") {
+            "el_elimination_interval=$($types[$p].Set2)" | Out-File -FilePath .\eventloop.txt -Append
+        }
+    }
+    if ($dmaps.Contains("$($map)") -eq $true) {
+        if ($types[$p].dmode -eq "derby deathmatch") {
+            "el_time_limit=$($types[$p].Set1)" | Out-File -FilePath .\eventloop.txt -Append
+        }
+        if ($types[$p].dmode -eq "team derby") {
+            "el_num_teams=$($types[$p].Set2)" | Out-File -FilePath .\eventloop.txt -Append
+            "el_time_limit=$($types[$p].Set1)" | Out-File -FilePath .\eventloop.txt -Append
+        }
+    }
+}
+
 # Start Defining variables: loading maps, getting modes per file
 for ($i=0; $i -le $($types.Count - 1) ; $i++) {
     load_maps $types[$i]
@@ -213,42 +282,3 @@ for ($i=0; $i -le $($types.Count - 1) ; $i++) {
 # ""
 # Write-Host "This script is licensed under MIT. For more Informations, please visit my Github (link above)"
 # pause
-
-
-
-
-# !! Signature-Part below !! Do not edit or remove completly ( Script "may" not work again ) !!
-
-# SIG # Begin signature block
-# MIIFuQYJKoZIhvcNAQcCoIIFqjCCBaYCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
-# gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUxjcwmpk6ZjzasGOQWdziN4S6
-# WfmgggNCMIIDPjCCAiqgAwIBAgIQtUDBeoA5ZoxHKwxPgr6tWDAJBgUrDgMCHQUA
-# MCwxKjAoBgNVBAMTIVBvd2VyU2hlbGwgTG9jYWwgQ2VydGlmaWNhdGUgUm9vdDAe
-# Fw0yMDEyMjUxMjQ3MTFaFw0zOTEyMzEyMzU5NTlaMBoxGDAWBgNVBAMTD1Bvd2Vy
-# U2hlbGwgVXNlcjCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBANq5cy0m
-# PVXJBUQ6skulPwGZsxnyI5xspUbYfG64+/c5oADa89/8s3qjhwdZdjZ1rUb1H5bO
-# s5VIGYRbnh/X6iLXynih5eH5Yw/dZ9dnhDrNvwP0Wjl1GCXoJF31+aq2f2fCIXb1
-# ko6Ravd2cpaDf2PXbvAJZIrePDbjuVpO/Gm7BK92/vzxttZGgfx3W/MOxXFdFmw0
-# NmwL/+D3QK37M7vPUtT0V3348BtZg4JTxGYpKIrPdmq8jfhSgkJFpEaSAO3ei3wk
-# jUIqsnjbN3cZ1B8BaU/W/5QfsfhB9qzwNhJrxVkUj/iYasTln+UpoLrDOnWf6S5j
-# 5BbsWfzP3kRy76kCAwEAAaN2MHQwEwYDVR0lBAwwCgYIKwYBBQUHAwMwXQYDVR0B
-# BFYwVIAQgUNKSbK968MRQaAMOlUfiKEuMCwxKjAoBgNVBAMTIVBvd2VyU2hlbGwg
-# TG9jYWwgQ2VydGlmaWNhdGUgUm9vdIIQzNIUZFiajIdAM2pxuNUrHjAJBgUrDgMC
-# HQUAA4IBAQBWtVFhm2KWxPqtnc2Zvsv5kkrF4yP2pgmt2a277g9d7LE/nS14pK9U
-# qDk5xCUt5nXk2Z+JOraMcp8J7ZTzrPk2cgE/PsajpvhuWVKNWfv20V6YqFM7+QJK
-# qn6n8NM+P/kKO3mrnBvP7WayyCVbbeQEt32q8JascIStuK5Uke+vRRAwh9LQ/JN4
-# 8fdkaL8J6LAFpIJUYCj9hf/vNdp/jVtYq0/AWTedHoFmdSrGeogEt/JHUVhOktfC
-# Ht57PVEn9okmqnH7cMLXJyMDDxraPmeUOcbP6qchieRcy+yyu8IQAPgXWwaoVh35
-# nYMGPaFjIVovxmii2HQhK0INxo6vVXCDMYIB4TCCAd0CAQEwQDAsMSowKAYDVQQD
-# EyFQb3dlclNoZWxsIExvY2FsIENlcnRpZmljYXRlIFJvb3QCELVAwXqAOWaMRysM
-# T4K+rVgwCQYFKw4DAhoFAKB4MBgGCisGAQQBgjcCAQwxCjAIoAKAAKECgAAwGQYJ
-# KoZIhvcNAQkDMQwGCisGAQQBgjcCAQQwHAYKKwYBBAGCNwIBCzEOMAwGCisGAQQB
-# gjcCARUwIwYJKoZIhvcNAQkEMRYEFNT8pXoOF5drOVG/1nppCP5bdnUDMA0GCSqG
-# SIb3DQEBAQUABIIBAC6/0ouxAeUKjALphJGSOYEaSJ6m9aaOcMgvL1yH8m2gLNOz
-# aSpXhdCU/IeTSSgKcK7VE+15wdNN6nd1fVSTxw6m0vX72w33dmQsi00YybSoOhj5
-# 8AM2WTJYMCN9wPEr+LoiCh0pbF1XUmPTcYZiMpj4OFJQbZ15NdYsF++FJw5G0+ib
-# PG3ZPBPWPkSOCTSCOe9M+aNdbnx5Hhqsy2I1ik53NfoBxN/kCGb8kZbfOcUSw+gX
-# FBvYzI/duWitAVx3+xLAIVW1F82UNQDMPhaJEWAusHorVHJpT0aO/DViMIA9B++h
-# v9sxL7YMFrpZGYVuhtazc5hRiP2vJlkWuK6aFqI=
-# SIG # End signature block
