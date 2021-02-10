@@ -21,7 +21,7 @@ Write-Host "Eventloop-Randomizer-Script"
 Write-Host "Preparing types"
 # Start fetching files
 
-[System.Collections.ArrayList]$Script:types = $(Get-ChildItem -Exclude WreckFest_ERS.ps1,eventloop.txt)  #fetching .txt-files, and define them in an array
+[System.Collections.ArrayList]$Script:types = $(Get-ChildItem -Exclude WreckFest_ERS.ps1,eventloop.txt,WreckfestERS.cer)
 
 if ( $types.Count -eq 0  ){
     Write-Warning "No files found. Please define the maps into files or download the predefined ones from the GitHub"
@@ -36,10 +36,8 @@ $types | ForEach-Object{ $_ | Add-Member -MemberType NoteProperty -Name Maps_Arr
 $types | ForEach-Object{ $_ | Add-Member -MemberType NoteProperty -Name rmode -Value "none" } # separate race from demo-modes
 $types | ForEach-Object{ $_ | Add-Member -MemberType NoteProperty -Name dmode -Value "none" }
 
-# End fetching files 
 # define functions
 function load_maps($a) {
-    #starting to ask for each entry in array
     Write-Host "`n$($($a).Name) found"
             $rh_l = $null
             do {
@@ -286,3 +284,36 @@ Write-Host "Keep updated on https://github.com/Hedrauta/wreckfest-eventloop-rand
 ""
 Write-Host "This script is licensed under MIT. For more Informations, please visit my Github (link above)"
 Sleep -Seconds 5
+
+# Please do not edit or remove the following lines. It'll need the WreckfestERS.crt installed on your PC to run properly
+# SIG # Begin signature block
+# MIIFZAYJKoZIhvcNAQcCoIIFVTCCBVECAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
+# gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUysE5bYoqC+7ewOnT10SSsUAh
+# kGGgggMCMIIC/jCCAeagAwIBAgIQSb1S4BP9Rr1Bp3x2CHYX6jANBgkqhkiG9w0B
+# AQsFADAXMRUwEwYDVQQDDAxXcmVja2Zlc3RFUlMwHhcNMjEwMjEwMTYxOTIyWhcN
+# MjIwMjEwMTYzOTIyWjAXMRUwEwYDVQQDDAxXcmVja2Zlc3RFUlMwggEiMA0GCSqG
+# SIb3DQEBAQUAA4IBDwAwggEKAoIBAQC5H52vw2/ilgWc3Q1eFu7xsJdhmopeQ+hI
+# d7U9+qCRBvgx9mXJX0NKwvloy8IwDCea2CUXXaFQFIACdyb/+FYjusDUGcXc8Nz9
+# u1mAVpYTxzcweqQSntdY7IBUiXQnJcxGRKtjmKc3/N/OK9ZX2Y8E/4YKFw50TVnE
+# 0Z25zIKJvZa9ue02kIW+l/ukAP+sql6Sq/zX7p/fyXf5KcuLdRvHEkiT1CZLav8n
+# uV9REmJo+EMORIHAqwPfeUojAOpqg29eHDP5Q1xIjQlYFaQY54mOedpaRdy+Cwex
+# Rw3AP2fu1+ZtX/y6J+NxJQDQADRdYvhsXl+CWey833B/dQlk8F4JAgMBAAGjRjBE
+# MA4GA1UdDwEB/wQEAwIHgDATBgNVHSUEDDAKBggrBgEFBQcDAzAdBgNVHQ4EFgQU
+# MACzacu3u7dO4GAnC8++1eCLCccwDQYJKoZIhvcNAQELBQADggEBAJPE3UZP9p+u
+# I3ai4kSpzrrX7j2PqYmUUEacRviboaaV1dlrH/vSiAy3ejeY3N6gvvsr1WBdC0Dx
+# JHrV9IvOepmqLK1GI3Nzuez0r/6ws+MIBvbbtgWiGAz3YvlCa3AF8Q+ueixSJV8H
+# RGB4mqIzF/PZEW2EOJaUTS5HNhJTdVmDpfkKL/0BYpp9JVOI6Iy01On7OTDDFvGO
+# NMND/F/TNmEsi1t7Uz1UBvSZr73/7FuSBkNGRJqEz16INgVEfKk9dzp7qj5k6x66
+# IPbHkSZVGy/f6mY6D6BxM+vjf6cGd1YMFU5aa9dg/DGmK87g1xNTtvAaGRZEiAtd
+# Ok2qbomaTfwxggHMMIIByAIBATArMBcxFTATBgNVBAMMDFdyZWNrZmVzdEVSUwIQ
+# Sb1S4BP9Rr1Bp3x2CHYX6jAJBgUrDgMCGgUAoHgwGAYKKwYBBAGCNwIBDDEKMAig
+# AoAAoQKAADAZBgkqhkiG9w0BCQMxDAYKKwYBBAGCNwIBBDAcBgorBgEEAYI3AgEL
+# MQ4wDAYKKwYBBAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUtXEa/LEBgCB7KwaPS7X7
+# whFO52EwDQYJKoZIhvcNAQEBBQAEggEAsK7SdFpk3XsrtZgsgpuvg0+l8M1o+xZu
+# yJ5f6pv5P/cpfCuUD0TH38H5rKRm1uxhBXEAhBq/C7amwLZiKGIMGkLS3nBXm1sC
+# tO4ojRxOVRh8Epwh1fvxXhE1h+6o/iywrOYeaLDME7NDhl3BDLQA26qPQkmKXczA
+# rMLsJeYoOGB6mdfS9BDb8Ram68PrDaKPdQLrhonxRXJmN90pe14vGuuepy/zMQBf
+# BD8Qzix6+QJkoWPyFz4ZLaGE9oaDUnAHwVIwJ3X/dOFoB9lO9843db1G2z9qWPOq
+# mu7wywLL/AJYyoVVgj92JOBiOHcJKy6Cs9EeOnlDtSkKpeD8L/z5wA==
+# SIG # End signature block
