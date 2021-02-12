@@ -29,8 +29,11 @@ if ( $types.Count -eq 0  ){
     Break
 }
 
-$types | ForEach-Object{ $_ | Add-Member -MemberType NoteProperty -Name Set1 -Value 0 } # Adding first kind of settings to Array and set to 0 for later use
-$types | ForEach-Object{ $_ | Add-Member -MemberType NoteProperty -Name Set2 -Value 0 } # second kind of settings ( elimination-secs or number of teams )
+$types | ForEach-Object{ $_ | Add-Member -MemberType NoteProperty -Name Set1 -Value 0 } # 1 = Maps avaiable, 0 = no maps or remove
+$types | ForEach-Object{ $_ | Add-Member -MemberType NoteProperty -Name rSet1 -Value 0 } # race-setting ( laps )
+$types | ForEach-Object{ $_ | Add-Member -MemberType NoteProperty -Name rSet2 -Value 0 } # race-Setting (Eli-Secs xor teams)
+$types | ForEach-Object{ $_ | Add-Member -MemberType NoteProperty -Name dSet1 -Value 0 } # demo-setting ( mins )
+$types | ForEach-Object{ $_ | Add-Member -MemberType NoteProperty -Name rSet1 -Value 0 } # demo-Settings (teams)
 $types | ForEach-Object{ $_ | Add-Member -MemberType NoteProperty -Name Maps -Value @() } #Adding empty Array for maps. Filled with maps laterly
 $types | ForEach-Object{ $_ | Add-Member -MemberType NoteProperty -Name Maps_Array -Value @() } #Adding empty Array for maps. Filled with maps laterly
 $types | ForEach-Object{ $_ | Add-Member -MemberType NoteProperty -Name rmode -Value "none" } # separate race from demo-modes
@@ -70,13 +73,14 @@ function mc_race($a) {
             }
             ""
             $a.rmode = $rh_l
+            $a.Set1 = 1
             if ($rh_l -eq "racing") {
                 $rh_m = 0
                 while ($($rh_m -ge 1 -and $rh_m -le 60) -eq $FALSE) {
                     try {[int]$rh_m = Read-Host -Prompt "Enter Number of Laps for choosen mode [1-60]"}
                     catch {Write-Warning "Please enter a valid number"}
                 }
-                $a.Set1 = $rh_m
+                $a.rSet1 = $rh_m
                 Write-Host "$($rh_m) lap(s) set"
             }
             if ($rh_l -eq "team race") {
@@ -87,18 +91,18 @@ function mc_race($a) {
                     catch {Write-Warning "Please enter a valid number"}
                 }
                 ""
-                $a.Set2 = $rh_m
+                $a.rSet2 = $rh_m
                 Write-Host "$($rh_m) Teams set."
                 while ($($rh_n -ge 1 -and $rh_n -le 60) -eq $FALSE) {
                     try{[int]$rh_n = Read-Host -Prompt "Set Number of laps [1-60]"}
                     catch {Write-Warning "Please enter a valid number"}
                 }
                 ""
-                $a.Set1 = $rh_n
+                $a.rSet1 = $rh_n
                 Write-Host "$($rh_n) lap(s) set"
             }
             if ($rh_l -eq "elimination race") {
-                $a.Set1 = 1
+                $a.rSet1 = 0
                 $rh_m = $null
                 ""
                 while ($eli_secs.Contains("$($rh_m)") -eq $FALSE){
@@ -109,7 +113,7 @@ function mc_race($a) {
                         $rh_m = $null
                     }
                 }
-                $a.Set2 = $rh_m
+                $a.rSet2 = $rh_m
                 Write-Host "$($rh_m) seconds set"
             }
         }
@@ -130,8 +134,9 @@ function mc_demo($a) {
             ""
             if ($dmodes.Contains("$($rh_l)") -eq $TRUE) {
                 $a.dmode = $rh_l
+                $a.Set1 = 1
                 if ($rh_l -eq 'derby') {
-                    $a.Set1 = 1
+                    $a.dSet1 = 1
                     Write-Host "Last man Standing picked. No further setup"
                 }
                 if ($rh_l -eq 'derby deathmatch') {
@@ -146,7 +151,7 @@ function mc_demo($a) {
                             $rh_m = $null
                         }
                     }
-                    $a.Set1 = $rh_m
+                    $a.dSet1 = $rh_m
                     Write-Host "$($rh_m) minutes set."
                 }
                 if ($rh_l -eq 'team derby') {
@@ -161,13 +166,13 @@ function mc_demo($a) {
                             $rh_m = $null
                         }
                     }
-                    $a.Set1 = $rh_m
+                    $a.dSet1 = $rh_m
                     Write-Host "$($rh_m) minutes set."
                     while ($($rh_n -ge 2 -and $rh_n -le 4) -eq $FALSE) {
                         try{[int]$rh_n = Read-Host -Prompt "Pick number of teams [2-4]"}
                         catch {Write-Warning "Please enter a valid value"}
                     }
-                    $a.Set2 = $rh_n
+                    $a.dSet2 = $rh_n
                     Write-Host "$($rh_n) teams set."
                 }
             }
@@ -227,26 +232,27 @@ function reload_or_remove { # Check if content of object is empty. Ask for Reloa
 }
 function write_file {
     "el_add=$Script:map" | Out-File -FilePath .\eventloop.txt -Append
-    "el_gamemode=$($types[$p].rmode)" | Out-File -FilePath .\eventloop.txt -Append
     if ($rmaps.Contains("$($map)") -eq $true){
+        "el_gamemode=$($types[$p].rmode)" | Out-File -FilePath .\eventloop.txt -Append
         if ($types[$p].rmode -eq "racing") {
-            "el_laps=$($types[$p].Set1)" | Out-File -FilePath .\eventloop.txt -Append
+            "el_laps=$($types[$p].rSet1)" | Out-File -FilePath .\eventloop.txt -Append
         }
         if ($types[$p].rmode -eq "team race") {
-            "el_num_teams=$($types[$p].Set2)" | Out-File -FilePath .\eventloop.txt -Append
-            "el_laps=$($types[$p].Set1)" | Out-File -FilePath .\eventloop.txt -Append
+            "el_num_teams=$($types[$p].rSet2)" | Out-File -FilePath .\eventloop.txt -Append
+            "el_laps=$($types[$p].rSet1)" | Out-File -FilePath .\eventloop.txt -Append
         }
         if ($types[$p].rmode -eq "elimination race") {
-            "el_elimination_interval=$($types[$p].Set2)" | Out-File -FilePath .\eventloop.txt -Append
+            "el_elimination_interval=$($types[$p].rSet2)" | Out-File -FilePath .\eventloop.txt -Append
         }
     }
     if ($dmaps.Contains("$($map)") -eq $true) {
+        "el_gamemode=$($types[$p].dmode)" | Out-File -FilePath .\eventloop.txt -Append
         if ($types[$p].dmode -eq "derby deathmatch") {
-            "el_time_limit=$($types[$p].Set1)" | Out-File -FilePath .\eventloop.txt -Append
+            "el_time_limit=$($types[$p].dSet1)" | Out-File -FilePath .\eventloop.txt -Append
         }
         if ($types[$p].dmode -eq "team derby") {
-            "el_num_teams=$($types[$p].Set2)" | Out-File -FilePath .\eventloop.txt -Append
-            "el_time_limit=$($types[$p].Set1)" | Out-File -FilePath .\eventloop.txt -Append
+            "el_num_teams=$($types[$p].dSet2)" | Out-File -FilePath .\eventloop.txt -Append
+            "el_time_limit=$($types[$p].dSet1)" | Out-File -FilePath .\eventloop.txt -Append
         }
     }
     "" | Out-File -FilePath .\eventloop.txt -Append
