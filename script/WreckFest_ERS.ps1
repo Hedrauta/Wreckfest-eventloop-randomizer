@@ -1,4 +1,4 @@
-﻿[System.Array]$Script:rmaps = @('speedway2_oval_loop';'loop';'triangle_r1';'crash_canyon_main_circuit';'bonebreaker_valley_main_circuit';'fields09_1';'forest12_2';'urban06';'sandpit2_2';'sandpit2_2_rev';'tarmac3_short_circuit';'tarmac3_short_circuit_rev';'mixed1_main_circuit';'mixed1_main_circuit_rev';'mixed2_main_circuit';'mixed2_main_circuit_rev';'mixed7_r3';'mixed7_r3_rev';'mixed9_r1';'mixed9_r1_rev';'mixed8_r2';'mixed8_r3_rev';'fields08_1';'fields08_1_rev';'orest11_1';'forest11_1_rev';'forest11_2';'forest11_2_rev';'sandpit1_long_loop';'sandpit1_long_loop_rev';'sandpit1_alt_loop';'sandpit1_alt_loop_rev';'sandpit2_full_circuit';'sandpit2_full_circuit_rev';'sandpit3_long_loop';'sandpit3_long_loop_rev';'sandpit3_short_loop';'sandpit3_short_loop';'tarmac1_main_circuit';'tarmac1_main_circuit_rev';'tarmac2_main_circuit';'tarmac2_main_circuit_rev';'tarmac3_main_circuit';'tarmac3_main_circuit_rev';'mixed3_long_loop';'mixed3_long_loop_rev';'mixed5_outer_loop';'mixed5_outer_loop_rev';'mixed5_inner_loop';'mixed5_inner_loop_rev';'mixed5_free_route';'urban08_1';'urban08_1_rev';'fields13_1_rev';'fields13_1';'gravel1_main_loop';'gravel1_main_loop_rev ';'sandpit1_short_loop';'sandpit1_short_loop_rev';'tarmac1_short_circuit';'tarmac1_short_circuit_rev';'mixed3_short_loop';'mixed3_short_loop_rev';'mixed4_main_circuit';'mixed4_main_circuit_rev';'mixed7_r1';'mixed7_r1_rev';'mixed8_r1';'dirt_speedway_dirt_oval';'speedway1_oval';'speedway2_inner_oval';'speedway2_outer_oval';'bigstadium_figure_8';'speedway1_figure_8';'speedway2_figure_8';'dirt_speedway_figure_8';'fields12_2')
+[System.Array]$Script:rmaps = @('speedway2_oval_loop';'loop';'triangle_r1';'crash_canyon_main_circuit';'bonebreaker_valley_main_circuit';'fields09_1';'forest12_2';'urban06';'sandpit2_2';'sandpit2_2_rev';'tarmac3_short_circuit';'tarmac3_short_circuit_rev';'mixed1_main_circuit';'mixed1_main_circuit_rev';'mixed2_main_circuit';'mixed2_main_circuit_rev';'mixed7_r3';'mixed7_r3_rev';'mixed9_r1';'mixed9_r1_rev';'mixed8_r2';'mixed8_r3_rev';'fields08_1';'fields08_1_rev';'orest11_1';'forest11_1_rev';'forest11_2';'forest11_2_rev';'sandpit1_long_loop';'sandpit1_long_loop_rev';'sandpit1_alt_loop';'sandpit1_alt_loop_rev';'sandpit2_full_circuit';'sandpit2_full_circuit_rev';'sandpit3_long_loop';'sandpit3_long_loop_rev';'sandpit3_short_loop';'sandpit3_short_loop';'tarmac1_main_circuit';'tarmac1_main_circuit_rev';'tarmac2_main_circuit';'tarmac2_main_circuit_rev';'tarmac3_main_circuit';'tarmac3_main_circuit_rev';'mixed3_long_loop';'mixed3_long_loop_rev';'mixed5_outer_loop';'mixed5_outer_loop_rev';'mixed5_inner_loop';'mixed5_inner_loop_rev';'mixed5_free_route';'urban08_1';'urban08_1_rev';'fields13_1_rev';'fields13_1';'gravel1_main_loop';'gravel1_main_loop_rev ';'sandpit1_short_loop';'sandpit1_short_loop_rev';'tarmac1_short_circuit';'tarmac1_short_circuit_rev';'mixed3_short_loop';'mixed3_short_loop_rev';'mixed4_main_circuit';'mixed4_main_circuit_rev';'mixed7_r1';'mixed7_r1_rev';'mixed8_r1';'dirt_speedway_dirt_oval';'speedway1_oval';'speedway2_inner_oval';'speedway2_outer_oval';'bigstadium_figure_8';'speedway1_figure_8';'speedway2_figure_8';'dirt_speedway_figure_8';'fields12_2')
 # defined Racing-maps, for later use
 [System.Array]$Script:dmaps = @('urban07';'fields10_2';'fields11_1';'bigstadium_demolition_arena';'field_derby_arena';'mudpit_demolition_arena';'grass_arena_demolition_arena';'smallstadium_demolition_arena';'fields13_2';'triangle_r2';'speedway2_demolition_arena';'speedway2_classic_arena')
 # defined Demolition-Maps
@@ -29,11 +29,8 @@ if ( $types.Count -eq 0  ){
     Break
 }
 
-$types | ForEach-Object{ $_ | Add-Member -MemberType NoteProperty -Name Set1 -Value 0 } # 1 = Maps avaiable, 0 = no maps or remove
-$types | ForEach-Object{ $_ | Add-Member -MemberType NoteProperty -Name rSet1 -Value 0 } # race-setting ( laps )
-$types | ForEach-Object{ $_ | Add-Member -MemberType NoteProperty -Name rSet2 -Value 0 } # race-Setting (Eli-Secs xor teams)
-$types | ForEach-Object{ $_ | Add-Member -MemberType NoteProperty -Name dSet1 -Value 0 } # demo-setting ( mins )
-$types | ForEach-Object{ $_ | Add-Member -MemberType NoteProperty -Name rSet1 -Value 0 } # demo-Settings (teams)
+$types | ForEach-Object{ $_ | Add-Member -MemberType NoteProperty -Name Set1 -Value 0 } # Adding first kind of settings to Array and set to 0 for later use
+$types | ForEach-Object{ $_ | Add-Member -MemberType NoteProperty -Name Set2 -Value 0 } # second kind of settings ( elimination-secs or number of teams )
 $types | ForEach-Object{ $_ | Add-Member -MemberType NoteProperty -Name Maps -Value @() } #Adding empty Array for maps. Filled with maps laterly
 $types | ForEach-Object{ $_ | Add-Member -MemberType NoteProperty -Name Maps_Array -Value @() } #Adding empty Array for maps. Filled with maps laterly
 $types | ForEach-Object{ $_ | Add-Member -MemberType NoteProperty -Name rmode -Value "none" } # separate race from demo-modes
@@ -73,14 +70,13 @@ function mc_race($a) {
             }
             ""
             $a.rmode = $rh_l
-            $a.Set1 = 1
             if ($rh_l -eq "racing") {
                 $rh_m = 0
                 while ($($rh_m -ge 1 -and $rh_m -le 60) -eq $FALSE) {
                     try {[int]$rh_m = Read-Host -Prompt "Enter Number of Laps for choosen mode [1-60]"}
                     catch {Write-Warning "Please enter a valid number"}
                 }
-                $a.rSet1 = $rh_m
+                $a.Set1 = $rh_m
                 Write-Host "$($rh_m) lap(s) set"
             }
             if ($rh_l -eq "team race") {
@@ -91,18 +87,18 @@ function mc_race($a) {
                     catch {Write-Warning "Please enter a valid number"}
                 }
                 ""
-                $a.rSet2 = $rh_m
+                $a.Set2 = $rh_m
                 Write-Host "$($rh_m) Teams set."
                 while ($($rh_n -ge 1 -and $rh_n -le 60) -eq $FALSE) {
                     try{[int]$rh_n = Read-Host -Prompt "Set Number of laps [1-60]"}
                     catch {Write-Warning "Please enter a valid number"}
                 }
                 ""
-                $a.rSet1 = $rh_n
+                $a.Set1 = $rh_n
                 Write-Host "$($rh_n) lap(s) set"
             }
             if ($rh_l -eq "elimination race") {
-                $a.rSet1 = 0
+                $a.Set1 = 1
                 $rh_m = $null
                 ""
                 while ($eli_secs.Contains("$($rh_m)") -eq $FALSE){
@@ -113,7 +109,7 @@ function mc_race($a) {
                         $rh_m = $null
                     }
                 }
-                $a.rSet2 = $rh_m
+                $a.Set2 = $rh_m
                 Write-Host "$($rh_m) seconds set"
             }
         }
@@ -134,9 +130,8 @@ function mc_demo($a) {
             ""
             if ($dmodes.Contains("$($rh_l)") -eq $TRUE) {
                 $a.dmode = $rh_l
-                $a.Set1 = 1
                 if ($rh_l -eq 'derby') {
-                    $a.dSet1 = 1
+                    $a.Set1 = 1
                     Write-Host "Last man Standing picked. No further setup"
                 }
                 if ($rh_l -eq 'derby deathmatch') {
@@ -151,7 +146,7 @@ function mc_demo($a) {
                             $rh_m = $null
                         }
                     }
-                    $a.dSet1 = $rh_m
+                    $a.Set1 = $rh_m
                     Write-Host "$($rh_m) minutes set."
                 }
                 if ($rh_l -eq 'team derby') {
@@ -166,13 +161,13 @@ function mc_demo($a) {
                             $rh_m = $null
                         }
                     }
-                    $a.dSet1 = $rh_m
+                    $a.Set1 = $rh_m
                     Write-Host "$($rh_m) minutes set."
                     while ($($rh_n -ge 2 -and $rh_n -le 4) -eq $FALSE) {
                         try{[int]$rh_n = Read-Host -Prompt "Pick number of teams [2-4]"}
                         catch {Write-Warning "Please enter a valid value"}
                     }
-                    $a.dSet2 = $rh_n
+                    $a.Set2 = $rh_n
                     Write-Host "$($rh_n) teams set."
                 }
             }
@@ -232,27 +227,26 @@ function reload_or_remove { # Check if content of object is empty. Ask for Reloa
 }
 function write_file {
     "el_add=$Script:map" | Out-File -FilePath .\eventloop.txt -Append
+    "el_gamemode=$($types[$p].rmode)" | Out-File -FilePath .\eventloop.txt -Append
     if ($rmaps.Contains("$($map)") -eq $true){
-        "el_gamemode=$($types[$p].rmode)" | Out-File -FilePath .\eventloop.txt -Append
         if ($types[$p].rmode -eq "racing") {
-            "el_laps=$($types[$p].rSet1)" | Out-File -FilePath .\eventloop.txt -Append
+            "el_laps=$($types[$p].Set1)" | Out-File -FilePath .\eventloop.txt -Append
         }
         if ($types[$p].rmode -eq "team race") {
-            "el_num_teams=$($types[$p].rSet2)" | Out-File -FilePath .\eventloop.txt -Append
-            "el_laps=$($types[$p].rSet1)" | Out-File -FilePath .\eventloop.txt -Append
+            "el_num_teams=$($types[$p].Set2)" | Out-File -FilePath .\eventloop.txt -Append
+            "el_laps=$($types[$p].Set1)" | Out-File -FilePath .\eventloop.txt -Append
         }
         if ($types[$p].rmode -eq "elimination race") {
-            "el_elimination_interval=$($types[$p].rSet2)" | Out-File -FilePath .\eventloop.txt -Append
+            "el_elimination_interval=$($types[$p].Set2)" | Out-File -FilePath .\eventloop.txt -Append
         }
     }
     if ($dmaps.Contains("$($map)") -eq $true) {
-        "el_gamemode=$($types[$p].dmode)" | Out-File -FilePath .\eventloop.txt -Append
         if ($types[$p].dmode -eq "derby deathmatch") {
-            "el_time_limit=$($types[$p].dSet1)" | Out-File -FilePath .\eventloop.txt -Append
+            "el_time_limit=$($types[$p].Set1)" | Out-File -FilePath .\eventloop.txt -Append
         }
         if ($types[$p].dmode -eq "team derby") {
-            "el_num_teams=$($types[$p].dSet2)" | Out-File -FilePath .\eventloop.txt -Append
-            "el_time_limit=$($types[$p].dSet1)" | Out-File -FilePath .\eventloop.txt -Append
+            "el_num_teams=$($types[$p].Set2)" | Out-File -FilePath .\eventloop.txt -Append
+            "el_time_limit=$($types[$p].Set1)" | Out-File -FilePath .\eventloop.txt -Append
         }
     }
     "" | Out-File -FilePath .\eventloop.txt -Append
