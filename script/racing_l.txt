@@ -25,3 +25,5 @@ urban08_1
 urban08_1_rev
 fields13_1_rev
 fields13_1
+mixed3_r3
+mixed3_r3_rev
