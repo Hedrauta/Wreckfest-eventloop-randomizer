@@ -1,0 +1,12 @@
+urban07
+fields10_2
+fields11_1
+bigstadium_demolition_arena
+field_derby_arena
+mudpit_demolition_arena
+grass_arena_demolition_arena
+smallstadium_demolition_arena
+fields13_2
+triangle_r2
+speedway2_demolition_arena
+speedway2_classic_arena
