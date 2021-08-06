@@ -12,3 +12,6 @@ speedway2_demolition_arena
 speedway2_classic_arena
 urban09_2
 wrecker01_1
+crm01_3
+crm01_2
+crm02_2
