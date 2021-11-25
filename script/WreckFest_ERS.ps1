@@ -227,8 +227,8 @@ function reload_or_remove { # Check if content of object is empty. Ask for Reloa
 }
 function write_file {
     "el_add=$Script:map" | Out-File -FilePath .\eventloop.txt -Append
-    "el_gamemode=$($types[$p].rmode)" | Out-File -FilePath .\eventloop.txt -Append
     if ($rmaps.Contains("$($map)") -eq $true){
+        "el_gamemode=$($types[$p].rmode || $types)" | Out-File -FilePath .\eventloop.txt -Append
         if ($types[$p].rmode -eq "racing") {
             "el_laps=$($types[$p].Set1)" | Out-File -FilePath .\eventloop.txt -Append
         }
@@ -241,6 +241,7 @@ function write_file {
         }
     }
     if ($dmaps.Contains("$($map)") -eq $true) {
+        "el_gamemode=$($types[$p].dmode || $types)" | Out-File -FilePath .\eventloop.txt -Append
         if ($types[$p].dmode -eq "derby deathmatch") {
             "el_time_limit=$($types[$p].Set1)" | Out-File -FilePath .\eventloop.txt -Append
         }
