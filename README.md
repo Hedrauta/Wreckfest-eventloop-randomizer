@@ -14,7 +14,7 @@ Which points to:
 
 ## First way (the "safest" one)
 
-> Run Powershell in admin, and execute 
+> Run Powershell as admin, and execute 
 
 > `Set-ExecutionPolicy RemoteSigned` (there will be no confirmation, but you can "check" it with `Get-ExecutionPolicy`
 
