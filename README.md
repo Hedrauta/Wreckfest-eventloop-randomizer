@@ -1,3 +1,5 @@
+### DM me on Discord if there are still issue: H3draut3r#6722
+
 # Wreckfest-eventloop-randomizer
  
 > This script is used to create and randomize eventloops for Wreckfest. 
@@ -36,4 +38,4 @@ Which points to:
 
 
 ## After changing policy (and maybe installing the certificate):
-> the ps1-file "***may be***" more able to run. 🤔 DM me on Discord if there are still issue: H3draut3r#6722 
+> the ps1-file "***may be***" more able to run. 🤔  
