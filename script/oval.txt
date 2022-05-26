@@ -1,4 +1,8 @@
-dirt_speedway_dirt_oval
-speedway1_oval
 speedway2_inner_oval
 speedway2_outer_oval
+dirt_speedway_dirt_oval
+speedway1_oval
+fields12_1
+fields12_1_rev
+fields10_1
+fields09_1

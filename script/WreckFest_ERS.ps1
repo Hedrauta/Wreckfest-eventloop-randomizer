@@ -1,24 +1,12 @@
-[System.Array]$Script:rmaps = @('crm01_1';'crm01_5';'crm02_1';'urban09_1';'fields14_1';'fields14_2';'mixed3_r3';'mixed3_r3_rev';'speedway2_oval_loop';'loop';'triangle_r1';'crash_canyon_main_circuit';'bonebreaker_valley_main_circuit';'fields09_1';'forest12_2';'urban06';'sandpit2_2';'sandpit2_2_rev';'tarmac3_short_circuit';'tarmac3_short_circuit_rev';'mixed1_main_circuit';'mixed1_main_circuit_rev';'mixed2_main_circuit';'mixed2_main_circuit_rev';'mixed7_r3';'mixed7_r3_rev';'mixed9_r1';'mixed9_r1_rev';'mixed8_r2';'mixed8_r3_rev';'fields08_1';'fields08_1_rev';'orest11_1';'forest11_1_rev';'forest11_2';'forest11_2_rev';'sandpit1_long_loop';'sandpit1_long_loop_rev';'sandpit1_alt_loop';'sandpit1_alt_loop_rev';'sandpit2_full_circuit';'sandpit2_full_circuit_rev';'sandpit3_long_loop';'sandpit3_long_loop_rev';'sandpit3_short_loop';'sandpit3_short_loop';'tarmac1_main_circuit';'tarmac1_main_circuit_rev';'tarmac2_main_circuit';'tarmac2_main_circuit_rev';'tarmac3_main_circuit';'tarmac3_main_circuit_rev';'mixed3_long_loop';'mixed3_long_loop_rev';'mixed5_outer_loop';'mixed5_outer_loop_rev';'mixed5_inner_loop';'mixed5_inner_loop_rev';'mixed5_free_route';'urban08_1';'urban08_1_rev';'fields13_1_rev';'fields13_1';'gravel1_main_loop';'gravel1_main_loop_rev ';'sandpit1_short_loop';'sandpit1_short_loop_rev';'tarmac1_short_circuit';'tarmac1_short_circuit_rev';'mixed3_short_loop';'mixed3_short_loop_rev';'mixed4_main_circuit';'mixed4_main_circuit_rev';'mixed7_r1';'mixed7_r1_rev';'mixed8_r1';'dirt_speedway_dirt_oval';'speedway1_oval';'speedway2_inner_oval';'speedway2_outer_oval';'bigstadium_figure_8';'speedway1_figure_8';'speedway2_figure_8';'dirt_speedway_figure_8';'fields12_2')
-# defined Racing-maps, for later use
-[System.Array]$Script:dmaps = @('crm01_3';'crm01_2';'crm02_2';'wrecker01_1';'urban09_2';'urban07';'fields10_2';'fields11_1';'bigstadium_demolition_arena';'field_derby_arena';'mudpit_demolition_arena';'grass_arena_demolition_arena';'smallstadium_demolition_arena';'fields13_2';'triangle_r2';'speedway2_demolition_arena';'speedway2_classic_arena')
-# defined Demolition-Maps
-[System.Array]$Script:maps = @('crm01_1';'crm01_5';'crm02_1';'crm01_3';'crm01_2';'crm02_2';'wrecker01_1';'urban09_2';'urban09_1';'fields14_1';'fields14_2';'mixed3_r3';'mixed3_r3_rev';'speedway2_oval_loop';'loop';'triangle_r1';'crash_canyon_main_circuit';'bonebreaker_valley_main_circuit';'fields09_1';'forest12_2';'urban06';'sandpit2_2';'sandpit2_2_rev';'tarmac3_short_circuit';'tarmac3_short_circuit_rev';'mixed1_main_circuit';'mixed1_main_circuit_rev';'mixed2_main_circuit';'mixed2_main_circuit_rev';'mixed7_r3';'mixed7_r3_rev';'mixed9_r1';'mixed9_r1_rev';'mixed8_r2';'mixed8_r3_rev';'fields08_1';'fields08_1_rev';'orest11_1';'forest11_1_rev';'forest11_2';'forest11_2_rev';'sandpit1_long_loop';'sandpit1_long_loop_rev';'sandpit1_alt_loop';'sandpit1_alt_loop_rev';'sandpit2_full_circuit';'sandpit2_full_circuit_rev';'sandpit3_long_loop';'sandpit3_long_loop_rev';'sandpit3_short_loop';'sandpit3_short_loop';'tarmac1_main_circuit';'tarmac1_main_circuit_rev';'tarmac2_main_circuit';'tarmac2_main_circuit_rev';'tarmac3_main_circuit';'tarmac3_main_circuit_rev';'mixed3_long_loop';'mixed3_long_loop_rev';'mixed5_outer_loop';'mixed5_outer_loop_rev';'mixed5_inner_loop';'mixed5_inner_loop_rev';'mixed5_free_route';'urban08_1';'urban08_1_rev';'fields13_1_rev';'fields13_1';'gravel1_main_loop';'gravel1_main_loop_rev ';'sandpit1_short_loop';'sandpit1_short_loop_rev';'tarmac1_short_circuit';'tarmac1_short_circuit_rev';'mixed3_short_loop';'mixed3_short_loop_rev';'mixed4_main_circuit';'mixed4_main_circuit_rev';'mixed7_r1';'mixed7_r1_rev';'mixed8_r1';'dirt_speedway_dirt_oval';'speedway1_oval';'speedway2_inner_oval';'speedway2_outer_oval';'bigstadium_figure_8';'speedway1_figure_8';'speedway2_figure_8';'dirt_speedway_figure_8';'fields12_2';'urban07';'fields10_2';'fields11_1';'bigstadium_demolition_arena';'field_derby_arena';'mudpit_demolition_arena';'grass_arena_demolition_arena';'smallstadium_demolition_arena';'fields13_2';'triangle_r2';'speedway2_demolition_arena';'speedway2_classic_arena')
-[System.Array]$Script:dmodes = @('derby';'derby deathmatch';'team derby')
-[System.Array]$Script:rmodes = @('racing';'team race';'elimination race')
-[System.Array]$Script:eli_secs = @('0';'20';'30';'45';'60';'90';'120')
-[System.Array]$Script:derby_secs = @('2';'4';'6';'8';'10';'12';'14';'16';'18';'20')
-# yeah!!!... gamemodes!!! 
-Write-Host " █████   ███   █████                             █████         ██████                    █████   "
-Write-Host "░░███   ░███  ░░███                             ░░███         ███░░███                  ░░███    "
-Write-Host "░███   ░███   ░███  ████████   ██████   ██████  ░███ █████  ░███ ░░░   ██████   █████  ███████  "
-Write-Host "░███   ░███   ░███ ░░███░░███ ███░░███ ███░░███ ░███░░███  ███████    ███░░███ ███░░  ░░░███░   "
-Write-Host "░░███  █████  ███   ░███ ░░░ ░███████ ░███ ░░░  ░██████░  ░░░███░    ░███████ ░░█████   ░███    "
-Write-Host " ░░░█████░█████░    ░███     ░███░░░  ░███  ███ ░███░░███   ░███     ░███░░░   ░░░░███  ░███ ███"
-Write-Host "   ░░███ ░░███      █████    ░░██████ ░░██████  ████ █████  █████    ░░██████  ██████   ░░█████ "
-Write-Host "    ░░░   ░░░      ░░░░░      ░░░░░░   ░░░░░░  ░░░░ ░░░░░  ░░░░░      ░░░░░░  ░░░░░░     ░░░░░"
-Write-Host "Eventloop-Randomizer-Script"
+﻿" __          __            _     __          _   ______ _____   _____ "
+" \ \        / /           | |   / _|        | | |  ____|  __ \ / ____|"
+"  \ \  /\  / / __ ___  ___| | _| |_ ___  ___| |_| |__  | |__) | (___  "
+"   \ \/  \/ / '__/ _ \/ __| |/ /  _/ _ \/ __| __|  __| |  _  / \___ \ "
+"    \  /\  /| | |  __/ (__|   <| ||  __/\__ \ |_| |____| | \ \ ____) |"
+"     \/  \/ |_|  \___|\___|_|\_\_| \___||___/\__|______|_|  \_\_____/ "
+"Wreckfest Eventloop-Randomizer-Script"
 
-Write-Host "Preparing types"
+"Preparing types"
 # Start fetching files
 
 [System.Collections.ArrayList]$Script:types = $(Get-ChildItem -Exclude WreckFest_ERS.ps1,eventloop.txt,WreckfestERS.cer)
@@ -29,6 +17,22 @@ if ( $types.Count -eq 0  ){
     Break
 }
 
+# Defining Maps and Modes
+
+[System.Array]$Script:rmaps = @('speedway2_inner_oval','speedway2_outer_oval','dirt_speedway_dirt_oval','speedway1_oval','fields12_1','fields12_1_rev','fields10_1','fields09_1','speedway2_figure_8','dirt_speedway_figure_8','speedway1_figure_8','fields12_2','bigstadium_figure_8','sandpit3_short_loop','sandpit3_short_loop_rev','tarmac3_main_circuit','tarmac3_main_circuit_rev','tarmac1_main_circuit','tarmac1_main_circuit_rev','tarmac1_short_circuit','tarmac1_short_circuit_rev','mixed7_r1','mixed7_r1_rev','mixed7_r2','mixed7_r2_rev','urban08_1','urban08_1_rev','gravel1_main_loop','gravel1_main_loop_rev','mixed5_outer_loop','mixed5_outer_loop_rev','mixed5_inner_loop','mixed5_inner_loop_rev','mixed5_free_route','mixed3_long_loop','mixed3_long_loop_rev','mixed3_short_loop','mixed3_short_loop_rev','mixed3_r3','mixed3_r3_rev','fields14_1','fields14_2','mixed4_main_circuit','mixed4_main_circuit_rev','sandpit1_long_loop','sandpit1_long_loop_rev','sandpit1_short_loop','sandpit1_short_loop_rev','sandpit1_alt_loop','sandpit1_alt_loop_rev','sandpit2_full_circuit','sandpit2_full_circuit_rev','sandpit2_2','sandpit2_2_rev','crm01_1','crm01_5','sandpit3_long_loop','sandpit3_long_loop_rev','crm02_1','tarmac2_main_circuit','tarmac2_main_circuit_rev','tarmac2_main_circuit_tourney','mixed9_r1','mixed9_r1_rev','triangle_r1','fields08_1','fields08_1_rev','tarmac3_short_circuit','tarmac3_short_circuit_rev','mixed1_main_circuit','mixed1_main_circuit_rev','mixed7_r3','mixed7_r3_rev','mixed2_main_circuit','mixed2_main_circuit_rev','mixed8_r1','mixed8_r2','mixed8_r3_rev','forest12_1','forest12_1_rev','forest12_2','forest13_1','forest13_1_rev','forest13_2','forest13_2_rev','forest11_1','forest11_1_rev','forest11_2','forest11_2_rev','rt01_1','speedway2_oval_loop','bonebreaker_valley_main_circuit','crash_canyon_main_circuit','loop','fields13_1','fields13_1_rev','urban06','urban09_1')
+# Racing-maps
+[System.Array]$Script:dmaps = @('crm01_3','crm01_2','crm02_2','triangle_r2','fields13_2','smallstadium_demolition_arena','mudpit_demolition_arena','grass_arena_demolition_arena','field_derby_arena','bigstadium_demolition_arena','fields11_1','fields10_2','urban07','wrecker01_1','urban09_2')
+# Demolition-Maps
+[System.Array]$Script:maps = $Script:rmaps + $Script:dmaps
+# Summary of both
+
+[System.Array]$Script:dmodes = @('derby';'derby deathmatch';'team derby')
+[System.Array]$Script:rmodes = @('racing';'team race';'elimination race')
+# Defined Gamemodes
+[System.Array]$Script:eli_secs = @('0';'20';'30';'45';'60';'90';'120')
+[System.Array]$Script:derby_secs = @('2';'4';'6';'8';'10';'12';'14';'16';'18';'20')
+# Defined "special" Settings for certain Gamemodes
+
 $types | ForEach-Object{ $_ | Add-Member -MemberType NoteProperty -Name Set1 -Value 0 } # Adding first kind of settings to Array and set to 0 for later use
 $types | ForEach-Object{ $_ | Add-Member -MemberType NoteProperty -Name Set2 -Value 0 } # second kind of settings ( elimination-secs or number of teams )
 $types | ForEach-Object{ $_ | Add-Member -MemberType NoteProperty -Name Maps -Value @() } #Adding empty Array for maps. Filled with maps laterly
@@ -38,7 +42,7 @@ $types | ForEach-Object{ $_ | Add-Member -MemberType NoteProperty -Name dmode -V
 
 # define functions
 function load_maps($a) {
-    Write-Host "`n$($($a).Name) found"
+    "`n$($($a).Name) found"
             $rh_l = $null
             do {
                 $rh_l = Read-Host -Prompt "Do you want load $($a.Name)? [y/n]"
@@ -48,8 +52,8 @@ function load_maps($a) {
                     $($a).Maps_Array | ForEach-Object  {
                         if ($maps.Contains("$($_)") -eq $FALSE){
                             $a.Maps.Remove($_) | Out-Null 
-                            Write-Host "$($_) is not part of the offical maplist. Removed Entry from Randomizer"
-                            sleep -Milliseconds 500
+                            "$($_) is not part of the offical maplist. Removed Entry from Randomizer"
+                            Start-Sleep -Milliseconds 500
                         }
                     }
                     [System.Array]$($a).Maps_Array = $($a).Maps # for use in further functions
@@ -62,10 +66,10 @@ function mc_race($a) {
     if ($rmodes.Contains("$($a.rmode)") -eq $False) {
         if ($rmaps.Contains("$($_)") -eq $TRUE){
             ""
-            Write-Host "Racing maps found"
+            "Racing maps found"
             ""
             while ($rmodes.Contains("$($rh_l)") -eq $FALSE) {
-                Write-Host "Racing-gamemodes: 'team race' ; 'elimination race' ; 'racing'"
+                "Racing-gamemodes: 'team race' ; 'elimination race' ; 'racing'"
                 $rh_l = Read-Host -Prompt "Enter Gamemode"
             }
             ""
@@ -77,7 +81,7 @@ function mc_race($a) {
                     catch {Write-Warning "Please enter a valid number"}
                 }
                 $a.Set1 = $rh_m
-                Write-Host "$($rh_m) lap(s) set"
+                "$($rh_m) lap(s) set"
             }
             if ($rh_l -eq "team race") {
                 $rh_m = 0
@@ -88,21 +92,21 @@ function mc_race($a) {
                 }
                 ""
                 $a.Set2 = $rh_m
-                Write-Host "$($rh_m) Teams set."
+                "$($rh_m) Teams set."
                 while ($($rh_n -ge 1 -and $rh_n -le 60) -eq $FALSE) {
                     try{[int]$rh_n = Read-Host -Prompt "Set Number of laps [1-60]"}
                     catch {Write-Warning "Please enter a valid number"}
                 }
                 ""
                 $a.Set1 = $rh_n
-                Write-Host "$($rh_n) lap(s) set"
+                "$($rh_n) lap(s) set"
             }
             if ($rh_l -eq "elimination race") {
                 $a.Set1 = 1
                 $rh_m = $null
                 ""
                 while ($eli_secs.Contains("$($rh_m)") -eq $FALSE){
-                    Write-Host "$($eli_secs)"
+                    "$($eli_secs)"
                     $rh_m = Read-Host "Choose seconds of elimination from above (0=every round)"
                     if ($eli_secs.Contains("$($rh_m)") -eq $FALSE) {
                         Write-Warning "Only Pick one of the following numbers"
@@ -110,7 +114,7 @@ function mc_race($a) {
                     }
                 }
                 $a.Set2 = $rh_m
-                Write-Host "$($rh_m) seconds set"
+                "$($rh_m) seconds set"
             }
         }
     }
@@ -122,9 +126,9 @@ function mc_demo($a) {
     if ($dmodes.Contains("$($a.dmode)") -eq $False) {
         if ($dmaps.Contains("$($_)") -eq $TRUE){
             ""
-            Write-Host "Demolition-maps found"
+            "Demolition-maps found"
             While ($dmodes.Contains("$($rh_l)") -eq $FALSE){
-                Write-Host "Demolition-gamemodes: 'derby' (Last man Standing) ; 'derby deathmatch' ; 'team derby'"
+                "Demolition-gamemodes: 'derby' (Last man Standing) ; 'derby deathmatch' ; 'team derby'"
                 $rh_l = Read-Host -Prompt "Enter Gamemode"
             }
             ""
@@ -132,13 +136,13 @@ function mc_demo($a) {
                 $a.dmode = $rh_l
                 if ($rh_l -eq 'derby') {
                     $a.Set1 = 1
-                    Write-Host "Last man Standing picked. No further setup"
+                    "Last man Standing picked. No further setup"
                 }
                 if ($rh_l -eq 'derby deathmatch') {
                     $rh_m = $null
                     while ($derby_secs.Contains("$($rh_m)") -eq $FALSE) {
                         ""
-                        Write-Host "$($derby_secs)"
+                        "$($derby_secs)"
                         $rh_m = Read-Host -Prompt "Pick time in minutes from above"
                         ""
                         if ($derby_secs.Contains("$($rh_m)") -eq $False) {
@@ -147,13 +151,13 @@ function mc_demo($a) {
                         }
                     }
                     $a.Set1 = $rh_m
-                    Write-Host "$($rh_m) minutes set."
+                    "$($rh_m) minutes set."
                 }
                 if ($rh_l -eq 'team derby') {
                     $rh_m = $null
                     $rh_n = $null
                     while ($derby_secs.Contains("$($rh_m)") -eq $FALSE) {
-                        Write-Host "$($derby_secs)"
+                        "$($derby_secs)"
                         $rh_m = Read-Host -Prompt "Pick time in minutes from above"
                         ""
                         if ($derby_secs.Contains("$($rh_m)") -eq $FALSE) {
@@ -162,13 +166,13 @@ function mc_demo($a) {
                         }
                     }
                     $a.Set1 = $rh_m
-                    Write-Host "$($rh_m) minutes set."
+                    "$($rh_m) minutes set."
                     while ($($rh_n -ge 2 -and $rh_n -le 4) -eq $FALSE) {
                         try{[int]$rh_n = Read-Host -Prompt "Pick number of teams [2-4]"}
                         catch {Write-Warning "Please enter a valid value"}
                     }
                     $a.Set2 = $rh_n
-                    Write-Host "$($rh_n) teams set."
+                    "$($rh_n) teams set."
                 }
             }
         }
@@ -180,7 +184,7 @@ function count_maps {
     for ($i=0;$i -le $($types.Count - 1);$i++){
         $count_maps += $types[$i].Maps.Count
     }
-    Write-Host "$($count_maps) Maps left"
+    "$($count_maps) Maps left"
     [int]$Script:count_m = $count_maps
 }
 function random_file {
@@ -207,13 +211,13 @@ function random_map {
 function reload_or_remove { # Check if content of object is empty. Ask for Reload, or remove if not.
     for ($i=0; $i -le $($types.Count - 1) ; $i++){
         if ($($types[$i].Set1) -ge 1 -and $($types[$i].Maps.Count) -eq 0){
-            Write-Host "$($types[$i].BaseName)-Maps are empty." 
+            "$($types[$i].BaseName)-Maps are empty." 
             do {
                 $rh_rm = $null
                 $rh_rm = Read-Host -Prompt "Do you want to load $($($types[$i]).Name) again? [y/n]" 
                 if ($rh_rm -eq 'y'){
                     [System.Collections.Generic.List[System.Object]]$($types[$i]).Maps =  $types[$i].Maps_Array 
-                    Write-Host "$($types[$i].Maps.Count) Maps reloaded"
+                    "$($types[$i].Maps.Count) Maps reloaded"
                 }
                 if ($rh_rm -eq 'n'){ 
                     $types[$i].Set1 = 0
@@ -260,8 +264,8 @@ for ($i=0; $i -le $($types.Count - 1) ; $i++) {
     mc_race $types[$i]
     mc_demo $types[$i]
 }
-Write-Host "Setup Complete. Start Randomizing <.<"
-sleep -Milliseconds 500
+"Setup Complete. Start Randomizing <.<"
+Start-Sleep -Milliseconds 500
 "" | Out-File .\eventloop.txt
 while ($types.Count -ge 1) {
     count_maps
@@ -271,7 +275,7 @@ while ($types.Count -ge 1) {
     reload_or_remove
 }
 "";"";""
-Write-Host "Randomizing finished" # Finally!!! ""
+"Randomizing finished" # Finally!!! ""
 do {
     $cl_c = Read-Host -Prompt "do you want the loop copied into your Clipboard? [y/n] " # faster copy-paste for you
     if ($cl_c -eq 'y'){
@@ -280,11 +284,11 @@ do {
 } until ($cl_c -eq 'y' -or $cl_c -eq 'n')
 
 "";"";"" # DONE!!!
-Write-Host "Thanks for using my Script."
-Write-Host "Keep updated on https://github.com/Hedrauta/wreckfest-eventloop-randomizer for new features, updates or if you have new ideas"
+"Thanks for using my Script."
+"Keep updated on https://github.com/Hedrauta/wreckfest-eventloop-randomizer for new features, updates or if you have new ideas"
 ""
-Write-Host "This script is licensed under MIT. For more Informations, please visit my Github (link above)"
-Sleep -Seconds 5
+"This script is licensed under MIT. For more Informations, please visit my Github (link above)"
+Start-Sleep -Seconds 5
 
 # Please do not edit or remove the following lines. It'll need the WreckfestERS.crt installed on your PC to run properly
 # SIG # Begin signature block
