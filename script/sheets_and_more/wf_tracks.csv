@@ -1,0 +1,116 @@
+map,submap,type,length,Tarmac,Gravel,dirt,event_id
+Big Valley Speedway,Open DemoArena,demo,0,100,0,0,speedway2_classic_arena
+Big Valley Speedway,DemoArena,demo,0,100,0,0,speedway2_demo_arena
+Big Valley Speedway,Figure8,racing,"0,67",100,0,0,speedway2_figure_8
+Big Valley Speedway,Inner Oval,racing,"0,562",100,0,0,speedway2_inner_oval
+Big Valley Speedway,Outer Oval,racing,"0,756",100,0,0,speedway2_outer_oval
+Big Valley Speedway,Outer Oval Special,racing,"1,65",100,0,0,speedway2_oval_loop
+Bloomfield Speedway,Dirt Oval,racing,"0,406",0,0,100,dirt_speedway_dirt_oval
+Bloomfield Speedway,Figure8,racing,"0,495",0,0,100,dirt_speedway_figure_8
+Bonebreaker Valley,Main Track,racing,"0,848",29,71,0,bonebreaker_valley_main_circuit
+Boulder Bank Circuit,Main Track,racing,"2,88",24,76,0,sandpit3_long_loop
+Boulder Bank Circuit,Main Track reversed,racing,"2,88",24,76,0,sandpit3_long_loop_rev
+Boulder Bank Circuit,Short Track,racing,"2,34",28,72,0,sandpit3_short_loop
+Boulder Bank Circuit,Short Track reversed,racing,"2,34",28,72,0,sandpit3_short_loop_rev
+Clayridge Circuit,Main Track,racing,"1,16",35,65,0,mixed9_r1
+Clayridge Circuit,Main Track reversed,racing,"1,16",35,65,0,mixed9_r1_rev
+Crash Canyon,Main Track,racing,"1,01",0,100,0,crash_canyon_main_circuit
+Deathloop,Main Track,racing,"1,18",78,0,0,loop
+Dirt Devil Stadium,Dirt Speedway,racing,"0,992",0,100,0,crm02_1
+Dirt Devil Stadium,DemoArena,demo,0,0,100,0,crm02_2
+Drytown Desert Circuit,Main Track,racing,"0,96",9,91,0,fields08_1
+Drytown Desert Circuit,Main Track reversed,racing,"0,96",9,91,0,fields08_1_rev
+Eagles Peak Motorpark,Race Track,racing,"2,01",63,37,0,fields13_1
+Eagles Peak Motorpark,Race Track reversed,racing,"2,01",63,37,0,fields13_1_rev
+Eagles Peak Motorpark,DemoArena,demo,0,63,37,0,fields13_2
+Espedalen Raceway,Main Track,racing,"2,28",100,0,0,tarmac3_main_circuit
+Espedalen Raceway,Main Track reversed,racing,"2,28",100,0,0,tarmac3_main_circuit_rev
+Espedalen Raceway,Short Track,racing,"1,05",100,0,0,tarmac3_short_circuit
+Espedalen Raceway,Short Track reversed,racing,"1,05",100,0,0,tarmac3_short_circuit_rev
+Fairfield County,DemoArena,demo,0,100,0,0,smallstadium_demolition_arena
+Fairfield Grass Field,DemoArena,demo,0,0,0,100,grass_arena_demolition_arena
+Fairfield Mud Pit,DemoArena,demo,0,0,0,100,mudpit_demolition_arena
+Finncross Circuit,Main Track,racing,"0,994",64,36,0,mixed1_main_circuit
+Finncross Circuit,Main Track reversed,racing,"0,994",64,36,0,mixed1_main_circuit_rev
+Fire Rock Raceway,Main Track,racing,"1,96",100,0,0,tarmac1_main_circuit
+Fire Rock Raceway,Main Track reversed,racing,"1,96",100,0,0,tarmac1_main_circuit_rev
+Fire Rock Raceway,Short Track,racing,"1,54",86,14,0,tarmac1_short_circuit
+Fire Rock Raceway,Short Track reversed,racing,"1,54",86,14,0,tarmac1_short_circuit_rev
+Firwood Motorcenter,Main Track,racing,"1,46",45,55,0,mixed7_r1
+Firwood Motorcenter,Main Track reversed,racing,"1,45",45,55,0,mixed7_r1_rev
+Firwood Motorcenter,Alt. Route,racing,"1,52",45,55,0,mixed7_r2
+Firwood Motorcenter,Alt. Route reversed,racing,"1,52",45,55,0,mixed7_r2_rev
+Firwood Motorcenter,Short Track,racing,"1,09",61,39,0,mixed7_r3
+Firwood Motorcenter,Short Track reversed,racing,"1,09",61,39,0,mixed7_r3_rev
+Glendale Countryside,Field Arena,demo,0,0,0,100,field_derby_arena
+Hellride,Main Track,racing,"1,61",78,0,0,urban06
+Hillstreet Circuit,Main Track,racing,"1,71",100,0,0,urban08_1
+Hillstreet Circuit,Main Track reversed,racing,"1,71",100,0,0,urban08_1_rev
+Hilltop Stadium,Figure8,racing,"1,01",100,0,0,speedway1_figure_8
+Hilltop Stadium,Oval,racing,"0,82",100,0,0,speedway1_oval
+Kingston Raceway,Tarmac Oval,racing,"0,443",100,0,0,fields12_1
+Kingston Raceway,Tarmac Oval reversed,racing,"0,443",100,0,0,fields12_1_rev
+Kingston Raceway,Figure8,racing,"0,469",80,0,20,fields12_2
+Maasten Motorcenter,Main Track,racing,"1,05",58,42,0,mixed2_main_circuit
+Maasten Motorcenter,Main Track reversed,racing,"1,05",58,42,0,mixed2_main_circuit_rev
+Madman Stadium,DemoArena,demo,0,100,0,0,bigstadium_demolition_arena
+Madman Stadium,Figure8,racing,"0,454",100,0,0,bigstadium_figure_8
+Midwest Motorcenter,Main Track,racing,"1,33",0,100,0,gravel1_main_loop
+Midwest Motorcenter,Main Track reversed,racing,"1,33",0,100,0,gravel1_main_loop_rev
+Motorcity Circuit,Main Track,racing,"2,94",100,0,0,tarmac2_main_circuit
+Motorcity Circuit,Main Track reversed,racing,"2,94",100,0,0,tarmac2_main_circuit_rev
+Motorcity Circuit,Trophy Track,racing,"2,94",100,0,0,tarmac2_main_circuit_tourney
+Mudford Motorpark,Mud oval,racing,"0,383",0,100,0,fields10_1
+Mudford Motorpark,Mud pit,demo,0,0,0,100,fields10_2
+Northfolk Ring,Main Track,racing,"1,14",45,55,0,mixed8_r1
+Northfolk Ring,Main Track reversed,racing,"1,11",44,56,0,mixed8_r3
+Northfolk Ring,Open Track,racing,"1,11",42,58,0,mixed8_r2
+Northland Raceway,Outer Route,racing,"2,09",42,58,0,mixed5_outer_loop
+Northland Raceway,Outer Route reversed,racing,"2,09",42,58,0,mixed5_outer_loop_rev
+Northland Raceway,Inner Route,racing,2,42,58,0,mixed5_inner_loop
+Northland Raceway,Inner Route reversed,racing,2,42,58,0,mixed5_inner_loop_rev
+Northland Raceway,Open Route,racing,2,32,68,0,mixed5_free_route
+Pinehills Raceway,Main Track,racing,"1,81",52,48,0,mixed3_long_loop
+Pinehills Raceway,Main Track reversed,racing,"1,81",52,48,0,mixed3_long_loop_rev
+Pinehills Raceway,Alt. Route,racing,"2,24",42,58,0,mixed3_r3
+Pinehills Raceway,Alt. Route reversed,racing,"2,24",42,58,0,mixed3_r3_rev
+Pinehills Raceway,Short Track,racing,"1,34",46,54,0,mixed3_short_loop
+Pinehills Raceway,Short Track reversed,racing,"1,34",46,54,0,mixed3_short_loop_rev
+Rattlesnake Racepark,Main Track,racing,"1,67",0,100,0,fields14_1
+Rattlesnake Racepark,Main Track reversed,racing,"1,67",0,100,0,fields14_2
+Rockfield Roughspot,Dirt Oval,racing,"0,848",0,100,0,fields09_1
+Rosenheim Raceway,Main Track,racing,"1,39",39,61,0,mixed4_main_circuit
+Rosenheim Raceway,Main Track reversed,racing,"1,39",39,61,0,mixed4_main_circuit_rev
+Sandstone Raceway,Main Track,racing,"2,46",6,94,0,sandpit1_long_loop
+Sandstone Raceway,Main Track reversed,racing,"2,46",6,94,0,sandpit1_long_loop_rev
+Sandstone Raceway,Short Track,racing,"1,6",9,91,0,sandpit1_short_loop
+Sandstone Raceway,Short Track reversed,racing,"1,6",9,91,0,sandpit1_short_loop_rev
+Sandstone Raceway,Alt. Route,racing,"2,54",5,95,0,sandpit1_alt_loop
+Sandstone Raceway,Alt. Route reversed,racing,"2,54",5,95,0,sandpit1_alt_loop_rev
+Savalox Sandpit,Main Track,racing,"2,26",26,74,0,sandpit2_full_circuit
+Savalox Sandpit,Main Track reversed,racing,"2,26",26,74,0,sandpit2_full_circuit_rev
+Savalox Sandpit,Short Track,racing,"1,08",18,82,0,sandpit2_2
+Savalox Sandpit,Short Track reversed,racing,"1,05",18,82,0,sandpit2_2_rev
+The Maw,DemoArena,demo,0,100,0,0,fields11_1
+Thunderbowl,DemoArena,demo,0,100,0,0,urban07
+Torsdalen Circuit,Main Track,racing,"0,873",100,0,0,forest13_1
+Torsdalen Circuit,Main Track reversed,racing,"0,873",100,0,0,forest13_1_rev
+Torsdalen Circuit,Short Track,racing,"1,03",100,0,0,forest13_2
+Torsdalen Circuit,Short Track reversed,racing,"1,03",100,0,0,forest13_2_rev
+Tribend Speedway,Main Track,racing,"0,873",100,0,0,forest12_1
+Tribend Speedway,Main Track reversed,racing,"0,876",100,0,0,forest12_1_rev
+Tribend Speedway,Main Track wild,racing,"0,873",100,0,0,forest12_2
+Wrecknado,Main Track,racing,"0,778",100,0,0,urban09_1
+Wrecknado,DemoArena,demo,0,100,0,0,urban09_2
+Vale Falls Circuit,Main Track,racing,"0,913",28,72,0,forest11_1
+Vale Falls Circuit,Main Track reversed,racing,"0,939",28,72,0,forest11_1_rev
+Vale Falls Circuit,Short Track,racing,"0,789",38,62,0,forest11_2
+Vale Falls Circuit,Short Track reversed,racing,"0,809",38,62,0,forest11_2_rev
+Wrecking Playground,Main Area,demo,0,44,0,56,wrecker01_1
+Bleak City,Main Track,racing,"3,44",0,100,0,crm01_1
+Bleak City,Main Track reversed,racing,"3,44",0,100,0,crm01_5
+Bleak City,Free Drive,demo,0,100,0,0,crm01_2
+Bleak City,DemoArena,demo,0,100,0,0,crm01_3
+Devil’s Canyon,Main Track,racing,"2,62",0,100,0,crm02_1
+Devil’s Canyon,Free Drive,demo,0,0,100,0,crm02_2
+Rally Trophy,Special Section,racing,"11,98",0,100,0,rt01_1

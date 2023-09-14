@@ -1,0 +1,15 @@
+crm01_3
+crm01_2
+crm02_2
+triangle_r2
+fields13_2
+smallstadium_demolition_arena
+mudpit_demolition_arena
+grass_arena_demolition_arena
+field_derby_arena
+bigstadium_demolition_arena
+fields11_1
+fields10_2
+urban07
+wrecker01_1
+urban09_2
