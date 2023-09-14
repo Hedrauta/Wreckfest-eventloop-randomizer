@@ -37,7 +37,7 @@ function get_wf_path(){
                 }
                 else{
                     Write-Host "Checking Path..."
-                    $check = Test-Path $ask_path -ErrorAction Ignore
+                    $check = $((Test-Path $ask_path -ErrorAction Ignore -PathType Leaf) -and $ask_scan -like "Wreckfest_x64.exe")
                     if ($check -eq $false) {
                         Write-Warning "Path was invalid. Please specify the full path to your Wreckfest_x64.exe"
                         $ask_path = Read-Host -Prompt "Path to Wreckfest_x64.exe (leave empty for no path)"

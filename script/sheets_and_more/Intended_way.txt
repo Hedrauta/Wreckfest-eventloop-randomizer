@@ -1,0 +1,33 @@
+Welcome
+load track-files ( csv > ConvertFrom-CSV )
+> Ask User to search automatically for Wreckfest-Installation
+	no 	> ask user for path ( leave empty for skip over. check given Path, if wrong, try again )
+		no path > notify user that only official maps are allowed
+	yes > Search entry in registry,
+			> lookup path, if contains "common/Wreckfest" look for mods in workshop
+				no path	> ask user for path to wreckfest
+
+	> lookup mods, ignore "my_example"
+> Ask for custom map-sorting or "preset" one
+	custom	> search for "sort-files" ( notify user, that he can "sort" the maps on his own risk )
+			> wait for user to start loading the files
+			> load files
+				> ask for settings per file ( demo / racing )
+			TODO > add Support for mods, remove invalid maps
+	preset	> notify for currently official maps only 
+			> ask for demo and/or racing only
+			> load corresponding preset files
+				> ask for setting per preset ( demo / racing )
+
+Clear-Host
+> Warn user, that the current "eventloop.txt" will get overwritten.
+> Start random picking
+> grab random entry, 
+	> get settings
+	> write eventloop-entry
+	> check empty category, ask for "reload"
+	> repeat until empty
+> END: ask for eventloop get written into Clipboard
+> Credits
+> Wait 10 seconds
+> Kill itself ( maybe funny animation ? )
