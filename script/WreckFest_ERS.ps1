@@ -9,20 +9,66 @@
 
 $maps = Get-Content .\sheets_and_more\wf_tracks.csv | ConvertFrom-Csv
 $preset = Get-ChildItem .\sheets_and_more\presets\
+[System.Array]$Script:dmodes = @('derby';'derby deathmatch';'team derby')
+[System.Array]$Script:rmodes = @('racing';'team race';'elimination race')
+# Defined Gamemodes
+[System.Array]$Script:eli_secs = @('0';'20';'30';'45';'60';'90';'120')
+[System.Array]$Script:derby_secs = @('2';'4';'6';'8';'10';'12';'14';'16';'18';'20')
 
-do {
-    $cl_c = Read-Host -Prompt "do you want the loop copied into your Clipboard? [y/n] " # faster copy-paste for you
-    if ($cl_c -eq 'y'){
-        Get-Content .\eventloop.txt | Set-Clipboard
-    }
-} until ($cl_c -eq 'y' -or $cl_c -eq 'n')
+function get_wf_path(){
+    $path = "none"
+    $ask_scan = ""
+    do{
+        $ask_scan = Read-Host -Prompt "Search for Wreckfest automatically? [y/n]"
+        if($ask_scan -eq "y") {
+            $reg = Get-ItemProperty -Path "HKCU:\System\GameConfigStore\Children\eb83a7db-53b5-4549-86f2-a532bdac56bb\"
+            $path = $reg.MatchedExeFullPath
+            $check = $true
+        }
+        if($ask_scan -eq "n") {
+            Write-Warning "If no Path is given, the script can't detect mods propery"
+            $check = $false
+            $ask_path = Read-Host -Prompt "Do you wanna specify the path to Wreckfest on your own? (leave empty for no path)"
+            do{
+                if($ask_path -eq "") {
+                    Write-Warning "No Path was given, supporting only official maps"
+                    $check = $true
+                    $path = ""
+                }
+                else{
+                    Write-Host "Checking Path..."
+                    $check = Test-Path $ask_path -ErrorAction Ignore
+                    if ($check -eq $false) {
+                        Write-Warning "Path was invalid. Please specify the full path to your Wreckfest_x64.exe"
+                        $ask_path = Read-Host -Prompt "Path to Wreckfest_x64.exe (leave empty for no path)"
+                    }
+                    if ($check -eq $true) {
+                        $path = $ask_path
+                    }
+                }
 
-Clear-Host; # DONE!!!
-"Thanks for using my Script."
-"Keep updated on https://github.com/Hedrauta/wreckfest-eventloop-randomizer for new features, updates or if you have new ideas"
-""
-"This script is licensed under MIT. For more Informations, please visit my Github (link above)"
-Start-Sleep -Seconds 10
+            } while($check -eq $false)
+        }
+    } while ($path -eq "none")
+    return $path
+}
+
+"$(get_wf_path)"
+
+
+# do {
+#     $cl_c = Read-Host -Prompt "do you want the loop copied into your Clipboard? [y/n] " # faster copy-paste for you
+#     if ($cl_c -eq 'y'){
+#         Get-Content .\eventloop.txt | Set-Clipboard
+#     }
+# } until ($cl_c -eq 'y' -or $cl_c -eq 'n')
+
+# Clear-Host; # DONE!!!
+# "Thanks for using my Script."
+# "Keep updated on https://github.com/Hedrauta/wreckfest-eventloop-randomizer for new features, updates or if you have new ideas"
+# ""
+# "This script is licensed under MIT. For more Informations, please visit my Github (link above)"
+# Start-Sleep -Seconds 10
 # TODO: add funny animation?
 
 # Please do not edit or remove the following lines. It'll need the WreckfestERS.crt installed on your PC to run properly
