@@ -8,13 +8,16 @@
 "Now with Mod-Support"
 
 $maps = Get-Content .\sheets_and_more\wf_tracks.csv | ConvertFrom-Csv
+$supported_mods = Get-Content .\sheets_and_more\supported_mods.csv | ConvertFrom-Csv
 $preset = Get-ChildItem .\sheets_and_more\presets\
+$files = Get-ChildItem .\custom_preset\
 [System.Array]$Script:dmodes = @('derby';'derby deathmatch';'team derby')
 [System.Array]$Script:rmodes = @('racing';'team race';'elimination race')
 # Defined Gamemodes
 [System.Array]$Script:eli_secs = @('0';'20';'30';'45';'60';'90';'120')
 [System.Array]$Script:derby_secs = @('2';'4';'6';'8';'10';'12';'14';'16';'18';'20')
 
+# FUNCTIONS
 function get_wf_path(){
     $path = "none"
     $ask_scan = ""
@@ -37,7 +40,7 @@ function get_wf_path(){
                 }
                 else{
                     Write-Host "Checking Path..."
-                    $check = $((Test-Path $ask_path -ErrorAction Ignore -PathType Leaf) -and $ask_scan -like "Wreckfest_x64.exe")
+                    $check = $((Test-Path $ask_path -ErrorAction Ignore -PathType Leaf) -and ($ask_path.Contains("Wreckfest.exe") -or $ask_path.Contains("Wreckfest_x64.exe")))
                     if ($check -eq $false) {
                         Write-Warning "Path was invalid. Please specify the full path to your Wreckfest_x64.exe"
                         $ask_path = Read-Host -Prompt "Path to Wreckfest_x64.exe (leave empty for no path)"
@@ -46,14 +49,64 @@ function get_wf_path(){
                         $path = $ask_path
                     }
                 }
-
             } while($check -eq $false)
         }
     } while ($path -eq "none")
     return $path
 }
 
-"$(get_wf_path)"
+function get_mods($wf_dir) {
+    Write-Host "Checking for mods"
+    $mods = @()
+    $workshop_dir = ""
+    if($wf_dir.Contains("steamapps\common")) {
+        $ask_scan = ""
+        do {
+            $ask_scan = Read-Host -Prompt "Steam-Version detected, shall it scan for subscribed mods? [y/n]"
+        } until ($ask_scan -eq "y" -or $ask_scan -eq "n")
+        if ($ask_scan -eq "y") {
+            $workshop_dir = $wf_dir.split("steamapps\common")[0] + "steamapps\workshop\content\228380\"
+        }
+        else{
+            Write-Host "Getting only local installed mods"
+            $workshop_dir = $wf_dir.split("\Wreckfest\")[0] + "\Wreckfest\mods\"
+        }
+    }
+    else {
+        $workshop_dir = $wf_dir.split("\Wreckfest\")[0] + "\Wreckfest\mods\"
+    }
+    $list = Get-ChildItem -Path $workshop_dir
+    $list.BaseName | ForEach-Object {
+        if($_ -eq "example"){
+            Write-Host "example-mod detected, skipping"
+        } 
+        else {
+            $mods += $_
+        }
+    }
+1}
+
+function math_rounds($kmmin, $length, $time) {
+    return $($time / ($length / $kmmin))
+}
+
+function map_check($map_list, $mod_list, $filelist) {
+
+}
+function setup() {
+
+}
+
+# Startup, get path to Wreckfest and possible mods
+"Getting Path to Wreckfest"
+Start-Sleep -Seconds 1
+$WRECKFEST_DIR = get_wf_path
+$mod_list = @{}
+if($WRECKFEST_DIR -ne "" ) {
+    $mod_list = get_mods($WRECKFEST_DIR)
+
+}
+
 
 
 # do {
