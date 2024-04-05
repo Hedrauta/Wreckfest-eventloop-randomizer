@@ -1,4 +1,4 @@
-### DM me on Discord if there are still issues: H3draut3r#6722
+### DM me on Discord if there are still issues: H3draut3r
 
 # Wreckfest-eventloop-randomizer
  
